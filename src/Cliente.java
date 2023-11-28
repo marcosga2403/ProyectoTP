@@ -15,7 +15,7 @@ public class Cliente {
 
     /**
      * Constructor of the class
-     *Holaaaaaaaaaaaaaaaaaaaaa
+     *
      * @param nombre Nombre del cliente
      * @param apellidos Apellidos del cliente
      * @param email Email del cliente
