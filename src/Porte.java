@@ -37,7 +37,15 @@ public class Porte {
      * @param precio
      */
     public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio) {
-
+        this.id = id;
+        this.nave = nave;
+        this.origen = origen;
+        this.muelleOrigen = muelleOrigen;
+        this.salida = salida;
+        this.destino = destino;
+        this.muelleDestino = muelleDestino;
+        this.llegada = llegada;
+        this.precio = precio;
     }
     public String getID() {
         return id;
@@ -73,10 +81,20 @@ public class Porte {
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
 
+        for(int i = 0; i<huecos.length;i++){
+            for(int j = 0; j<huecos.length;j++){
+                if(huecos[i][j]==true){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
-
+        if(huecos[fila][columna]==true){
+            return false;
+        }else return true;
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
