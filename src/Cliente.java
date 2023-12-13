@@ -42,11 +42,13 @@ public class Cliente {
     }
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
-        for(int i = 0; i<listaEnvios.l)
+        if(listaEnvios.estaLlena()){
+            return true;
+        }else return false;
     }
     // TODO: Devuelve un envío en función de su posición
     public Envio getEnvio(int i) {
-
+        return listaEnvios.getEnvio(i);
     }
     public ListaEnvios getListaEnvios() {
         return listaEnvios;
@@ -54,13 +56,15 @@ public class Cliente {
     // TODO: Añade un envío al cliente
     public boolean aniadirEnvio(Envio envio) {
 
+        return listaEnvios.insertarEnvio(envio);
+
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
     // TODO: Elimina el envío de la lista de envíos del pasajero
     public boolean cancelarEnvio(String localizador) {
-
+        return listaEnvios.eliminarEnvio(localizador);
     }
     public void listarEnvios() {
         listaEnvios.listarEnvios();
@@ -81,6 +85,21 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
+
+        String email;
+        String nombre;
+        String apellidos;
+        do {
+            System.out.println("Introduzca su nombre: ");
+             nombre = teclado.nextLine();
+            System.out.println("Introduzca sus apellidos: ");
+             apellidos = teclado.nextLine();
+            System.out.println("Introduzca su email: ");
+            email = teclado.nextLine();
+        }while (clientes.buscarClienteEmail(email)!=null);
+
+
+
 
 
 
