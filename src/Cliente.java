@@ -38,7 +38,7 @@ public class Cliente {
     }
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
     public String toString() {
-        return this.nombre+this.apellidos+", "+this.email;
+        return this.nombre+" "+this.apellidos+", "+this.email;
     }
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
