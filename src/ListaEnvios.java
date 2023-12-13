@@ -28,6 +28,13 @@ public class ListaEnvios {
     }
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
+        for(int i = 0; i<envios.length;i++){
+            for(int j = 0; j<envios.length;j++){
+                if(envios[i][j]==true){
+                    return false;
+                }
+            }
+        }
 
     }
 	//TODO: Devuelve el envio dado un indice

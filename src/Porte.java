@@ -126,8 +126,8 @@ public class Porte {
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
      */
     public Envio buscarEnvio(int fila, int columna) {
-        if (fila >= 0 && fila <= envios.length && columna >= 0 && columna <= envios.length){
-            return envio;
+        if (fila >= 0 && fila <= huecos.length && columna >= 0 && columna <= huecos.length){
+            return huecos[fila][columna];
         } else {
             return null;
         }
