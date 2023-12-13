@@ -29,13 +29,10 @@ public class ListaEnvios {
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
         for(int i = 0; i<envios.length;i++){
-            for(int j = 0; j<envios.length;j++){
-                if(envios[i][j]==true){
-                    return false;
-                }
+            if(envios[i]==true){
+                return false;
             }
         }
-
     }
 	//TODO: Devuelve el envio dado un indice
     public Envio getEnvio(int i) {
@@ -48,8 +45,11 @@ public class ListaEnvios {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarEnvio(Envio envio) {
-
-        return false;
+        for (int i = 0; i<envios.length; i++){
+            if(envios[i]==true){
+                envio = i;
+            } else return false;
+        }
     }
 
     /**
