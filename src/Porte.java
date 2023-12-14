@@ -84,7 +84,7 @@ public class Porte {
         int huecosLibres = 0;
         for (int i = 0 ; i < huecos.length;i++){
             for(int j = 0; j < huecos[0].length ;j++) {
-                if (huecos[i][j]==true){
+                if (huecos[i][j]==false){
                     huecosLibres++;
                 }
             }
@@ -94,16 +94,13 @@ public class Porte {
 
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
-
-        for(int i = 0; i<huecos.length;i++){
-            for(int j = 0; j<huecos.length;j++){
-                if(huecos[i][j]==true){
-                    return false;
-                }
-            }
+        int huecosLibres = numHuecosLibres();
+        if (huecosLibres==0) {
+            return true;
         }
-        return true;
+        return false;
     }
+
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
         if(huecos[fila][columna]==true){
