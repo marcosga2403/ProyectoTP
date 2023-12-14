@@ -36,7 +36,8 @@ public class Porte {
      * @param llegada
      * @param precio
      */
-    public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio) {
+    public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio,
+                 int tamPortesX, int tamPortesY) {
         this.id = id;
         this.nave = nave;
         this.origen = origen;
@@ -46,7 +47,9 @@ public class Porte {
         this.muelleDestino = muelleDestino;
         this.llegada = llegada;
         this.precio = precio;
+        this.huecos = new boolean[tamPortesX][tamPortesY];
     }
+
     public String getID() {
         return id;
     }
@@ -74,28 +77,21 @@ public class Porte {
     public double getPrecio() {
         return precio;
     }
+
+
     // TODO: Devuelve el número de huecos libres que hay en el porte
     public int numHuecosLibres() {
         int huecosLibres = 0;
-        for (int i = 0 ; i<huecos.length;i++){
-            if (huecos[i]==true){
-                huecosLibres ++;
-                return false;
-            }
-            for(int j = 0; j<huecos.length;j++) {
-                if (huecos[j]==true){
-                    huecosLibres ++;
-                    return false;
+        for (int i = 0 ; i < huecos.length;i++){
+            for(int j = 0; j < huecos[0].length ;j++) {
+                if (huecos[i][j]==true){
+                    huecosLibres++;
                 }
             }
         }
-        /*
-        if(huecos[fila][columna]==true){
-            return false;
-        }else return true;
-         */
-        return true;
+        return huecosLibres;
     }
+
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
 

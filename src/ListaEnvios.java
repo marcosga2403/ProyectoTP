@@ -91,7 +91,9 @@ public class ListaEnvios {
      * en el enunciado
      */
     public void listarEnvios() {
-
+        for (int i =0; i<= envios.length; i++){
+            System.out.println(envios[i].toString());
+        }
     }
 
     /**
