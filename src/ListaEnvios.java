@@ -34,10 +34,12 @@ public class ListaEnvios {
             }
         }
     }
+
 	//TODO: Devuelve el envio dado un indice
-    public Envio getEnvio(int i) {
-        return null;
+    public Envio getEnvio(int i){
+        return envios[i];
     }
+
 
     /**
      * TODO: insertamos un nuevo envío en la lista
