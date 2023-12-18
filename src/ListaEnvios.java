@@ -65,8 +65,11 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-
-
+        for (int i= 0; i< envios.length; i++){
+            if (envios[i].getLocalizador() == localizador){
+            }
+            return envios[i];
+        }
         return null;
     }
 
