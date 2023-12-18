@@ -83,9 +83,9 @@ public class ListaEnvios {
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
         for (int i = 0; i< envios.length; i++){
             if ((envios[i].getColumna() == columna) && (envios[i].getFila() == fila) && (envios[i].getPorte().getID() == idPorte)){
-            }return envios[i];
+            }
+            return envios[i];
         }
-
         return null;
     }
 
@@ -95,7 +95,12 @@ public class ListaEnvios {
      * @return True si se ha borrado correctamente, false en cualquier otro caso
      */
     public boolean eliminarEnvio (String localizador) {
-
+        for (int i = 0; i < envios.length; i++){
+            if (envios[i].getLocalizador() == localizador){
+                envios[i].cancelar();
+            }
+            return true;
+        }
         return false;
     }
 
