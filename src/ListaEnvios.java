@@ -81,7 +81,10 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
-
+        for (int i = 0; i< envios.length; i++){
+            if ((envios[i].getColumna() == columna) && (envios[i].getFila() == fila) && (envios[i].getPorte().getID() == idPorte)){
+            }return envios[i];
+        }
 
         return null;
     }
