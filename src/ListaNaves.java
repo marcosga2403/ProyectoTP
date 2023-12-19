@@ -17,21 +17,37 @@ public class ListaNaves {
      * @param capacidad
      */
     public ListaNaves(int capacidad) {
+        this.naves = new Nave[capacidad];
         
 		
 		
     }
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
-
+        int cont=0;
+        for(int i = 0;i<naves.length;i++){
+            if(naves[i]!=null){
+                cont++;
+            }
+        }
+        return cont;
     }
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
-
+        int cont=0;
+        for(int i = 0;i<naves.length;i++){
+            if(naves[i]!=null){
+                cont++;
+            }
+        }
+        if(cont==naves.length-1){
+            return true;
+        }
+        else return false;
     }
 	// TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
-        return null;
+        return naves[posicion];
     }
 
     /**
@@ -40,8 +56,12 @@ public class ListaNaves {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
-
-
+        for(int i = 0;i<naves.length;i++){
+            if(naves[i]==null){
+                naves[i]=nave;
+                return true;
+            }
+        }
         return false;
     }
     /**
@@ -50,11 +70,22 @@ public class ListaNaves {
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
-
+        for (int i = 0;i<naves.length;i++){
+            if(naves[i].getMatricula()==matricula){
+                return naves[i];
+            }
+        }
         return null;
+
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
+        for(int i =0;i<naves.length;i++){
+            naves[i].toString();
+            if(naves[i]==null){
+                System.out.println(" ");
+            }
+        }
 
     }
 
@@ -71,9 +102,12 @@ public class ListaNaves {
      * @return
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
-        Nave nave = null;
-
-
+        String matricula;
+        do {
+            System.out.println(mensaje);
+            matricula = teclado.nextLine();
+        }while (buscarNave(matricula)==null);
+        Nave nave= buscarNave(matricula);
         return nave;
     }
 
