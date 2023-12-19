@@ -118,11 +118,12 @@ public class Porte {
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
      */
     public Envio buscarEnvio(int fila, int columna) {
-        if (fila >= 0 && fila <= huecos.length && columna >= 0 && columna <= huecos.length){
-            return huecos[fila][columna];
-        } else {
-            return null;
+        for (int i = 0; i < listaEnvios.getOcupacion(); i++){
+            if (listaEnvios.getEnvio(i).getFila() == fila && listaEnvios.getEnvio(i).getColumna() == columna){
+                return listaEnvios.getEnvio(i);
+            }
         }
+        return null;
     }
 
 
@@ -133,6 +134,10 @@ public class Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
+        envio.getHueco() =
+        if (huecos[][] == true){
+
+        }
 
         return false;
     }
@@ -218,7 +223,7 @@ public class Porte {
      * @return ejemplo -> "PM0123"
      */
     public static String generarID(Random rand) {
-        return "PM";
+        return "";
     }
 
     /**
