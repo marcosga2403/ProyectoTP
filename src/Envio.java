@@ -57,7 +57,91 @@ public class Envio {
 
     // TODO: Ejemplos: "1A" para el hueco con fila 1 y columna 1, "3D" para el hueco con fila 3 y columna 4
     public String getHueco() {
-        return getFila()+getColumna()+"";
+        String columna ="";
+        switch (getColumna()){
+            case 0:
+                columna = "A";
+                break;
+            case 1:
+                columna = "B";
+                break;
+            case 2:
+                columna = "C";
+                break;
+            case 3:
+                columna = "D";
+                break;
+            case 4:
+                columna = "E";
+                break;
+            case 5:
+                columna = "F";
+                break;
+            case 6:
+                columna = "G";
+                break;
+            case 7:
+                columna = "H";
+                break;
+            case 8:
+                columna = "I";
+                break;
+            case 9:
+                columna = "J";
+                break;
+            case 10:
+                columna = "K";
+                break;
+            case 11:
+                columna = "L";
+                break;
+            case 12:
+                columna = "M";
+                break;
+            case 13:
+                columna = "N";
+                break;
+            case 14:
+                columna = "Ñ";
+                break;
+            case 15:
+                columna = "O";
+                break;
+            case 16:
+                columna = "P";
+                break;
+            case 17:
+                columna = "Q";
+                break;
+            case 18:
+                columna = "R";
+                break;
+            case 19:
+                columna = "S";
+                break;
+            case 20:
+                columna = "T";
+                break;
+            case 21:
+                columna = "U";
+                break;
+            case 22:
+                columna = "V";
+                break;
+            case 23:
+                columna = "W";
+                break;
+            case 24:
+                columna = "X";
+                break;
+            case 25:
+                columna = "Y";
+                break;
+            case 26:
+                columna = "Z";
+                break;
+        }
+        return getFila()+columna;
     }
     public double getPrecio() {
         return precio;
@@ -70,7 +154,7 @@ public class Envio {
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
-
+        porte.
     }
 
     /**
@@ -105,7 +189,7 @@ public class Envio {
         System.out.println("Precio: "+getPrecio());
         PrintWriter ficheroSalida = null;
         try {
-            ficheroSalida = new PrintWriter("C:\\\\PracticaAburridisima" + fichero + ".txt");
+            ficheroSalida = new PrintWriter("C:\\" + fichero + ".txt");
             ficheroSalida.println("-----------------------------------------------------");
             ficheroSalida.println("--------- Factura del envio\"+getLocalizador()+\" ---------");
             ficheroSalida.println("-----------------------------------------------------");
