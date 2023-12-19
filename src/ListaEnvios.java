@@ -53,10 +53,11 @@ public class ListaEnvios {
      */
     public boolean insertarEnvio(Envio envio) {
         for (int i = 0; i<envios.length; i++){
-            if(envios[i]==true){
-                envio = i;
-            } else return false;
-        }
+            if(envios[i] == null){
+                envios[i] = envio;
+                envios[i].getPorte().ocuparHueco(envio);
+            }return true;
+        }return false;
     }
 
     /**
@@ -67,8 +68,8 @@ public class ListaEnvios {
     public Envio buscarEnvio(String localizador) {
         for (int i= 0; i< envios.length; i++){
             if (envios[i].getLocalizador() == localizador){
+                return envios[i];
             }
-            return envios[i];
         }
         return null;
     }
@@ -83,8 +84,8 @@ public class ListaEnvios {
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
         for (int i = 0; i< envios.length; i++){
             if ((envios[i].getColumna() == columna) && (envios[i].getFila() == fila) && (envios[i].getPorte().getID() == idPorte)){
+                return envios[i];
             }
-            return envios[i];
         }
         return null;
     }
@@ -98,8 +99,8 @@ public class ListaEnvios {
         for (int i = 0; i < envios.length; i++){
             if (envios[i].getLocalizador() == localizador){
                 envios[i].cancelar();
+                return true;
             }
-            return true;
         }
         return false;
     }
