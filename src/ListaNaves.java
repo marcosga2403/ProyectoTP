@@ -107,7 +107,7 @@ public class ListaNaves {
             System.out.println(mensaje);
             matricula = teclado.nextLine();
         }while (buscarNave(matricula)==null);
-        Nave nave = buscarNave(matricula);
+        Nave nave= buscarNave(matricula);
         return nave;
     }
 
