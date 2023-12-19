@@ -219,7 +219,7 @@ public class Envio {
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
-        localizador =
+        localizador.append(rand.n)
 
 
         return localizador.toString();
