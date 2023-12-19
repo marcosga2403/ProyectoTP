@@ -20,7 +20,7 @@ public class ListaEnvios {
      */
     public ListaEnvios(int capacidad) {
 		
-		
+
     }
     // TODO: Devuelve el número de envíos que hay en la lista
     public int getOcupacion() {
@@ -124,9 +124,13 @@ public class ListaEnvios {
      * @return
      */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
-        Envio envio = null;
+        String localizador;
+        do {
+            System.out.println(mensaje);
+            localizador = teclado.nextLine();
 
-
+        }while (buscarEnvio(localizador)==null);
+        Envio envio = buscarEnvio(localizador)
         return envio;
     }
 
