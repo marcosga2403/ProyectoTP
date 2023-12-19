@@ -66,6 +66,6 @@ public class Nave {
      * @return ejemplo del formato -> "Planet Express One (EP-245732X)"
      */
     public String toStringSimple() {
-        return matricula+"("+modelo+"-"+matricula+")";
+        return marca+"("+modelo+"-"+matricula+")";
     }
 }
