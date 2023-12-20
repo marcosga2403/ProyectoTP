@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -97,16 +99,18 @@ public class ListaClientes {
      * @return
      */
     public boolean escribirClientesCsv(String fichero) {
-
-
+        PrintWriter pw = null;
         try {
-
-
-
+            pw = new PrintWriter(new File(fichero));
+            for (int i = 0; i < clientes.length; i++){
+                pw.println(clientes[i].toString());
+            }
         } catch (FileNotFoundException e) {
             return false;
         } finally {
-
+            if (pw != null){
+                pw.close();
+            }
         }
         return true;
     }

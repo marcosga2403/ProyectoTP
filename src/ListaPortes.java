@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -121,8 +122,7 @@ public class ListaPortes {
     public boolean escribirPortesCsv(String fichero) {
         PrintWriter pw = null;
         try {
-            FileWriter fileWriter = new FileWriter(fichero);
-            pw = new PrintWriter(fileWriter);
+            pw = new PrintWriter(new File(fichero));
             for (int i = 0; i < portes.length; i++){
                 pw.println(portes[i].toString());
             }
