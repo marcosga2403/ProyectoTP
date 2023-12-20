@@ -179,13 +179,15 @@ public class ListaEnvios {
                 int columnas = sc.nextInt();
                 double precio = sc.nextDouble();
                 Envio envio = new Envio(localizador, porte, cliente, fila, columnas, precio);
-                insertarEnvio(envio);
+                porte.ocuparHueco(envio);
+                cliente.aniadirEnvio(envio);
             }
-
         } catch (FileNotFoundException e) {
             System.out.println("No se ha encontrado el fichero de envíos");
         } finally {
-
+            if (sc != null){
+                sc.close();
+            }
         }
     }
 }
