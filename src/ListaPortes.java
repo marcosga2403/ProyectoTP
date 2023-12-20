@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -23,11 +24,20 @@ public class ListaPortes {
     }
     // TODO: Devuelve el número de portes que hay en la lista
     public int getOcupacion() {
-
+        for (int i = 0; i < portes.length; i++){
+            if (portes[i] == null){
+                return i;
+            }
+        }
+        return portes.length;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        for(int i = 0; i < portes.length; i++){
+            if(portes[i] == null){
+                return false;
+            }
+        }return true;
     }
 
 	//TODO: devuelve un porte dado un indice
@@ -42,7 +52,13 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-
+        for (int i = 0; i<portes.length; i++){
+            if(portes[i] == null){
+                portes[i] = porte;
+                portes[i].ocuparHueco();
+                return true;
+            }
+        }
         return false;
     }
 
@@ -103,8 +119,13 @@ public class ListaPortes {
      * @return
      */
     public boolean escribirPortesCsv(String fichero) {
+        PrintWriter pw = null;
         try {
-
+            FileWriter fileWriter = new FileWriter(fichero);
+            pw = new PrintWriter(fileWriter);
+            for (int i = 0; i < portes.length; i++){
+                pw.println(portes[i].toString());
+            }
             return true;
         } catch (FileNotFoundException e) {
             return false;

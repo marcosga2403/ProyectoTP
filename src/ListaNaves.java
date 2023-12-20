@@ -18,10 +18,8 @@ public class ListaNaves {
      */
     public ListaNaves(int capacidad) {
         this.naves = new Nave[capacidad];
-        
-		
-		
     }
+
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
         int cont=0;
@@ -32,6 +30,7 @@ public class ListaNaves {
         }
         return cont;
     }
+
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
         int cont=0;
@@ -45,6 +44,7 @@ public class ListaNaves {
         }
         else return false;
     }
+
 	// TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
         return naves[posicion];
@@ -64,6 +64,7 @@ public class ListaNaves {
         }
         return false;
     }
+
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
      * @param matricula
@@ -78,6 +79,7 @@ public class ListaNaves {
         return null;
 
     }
+
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
         for(int i =0;i<naves.length;i++){

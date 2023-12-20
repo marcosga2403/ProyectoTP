@@ -20,14 +20,17 @@ public class ListaPuertosEspaciales {
         
 		
     }
+
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
 
     }
+
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
 
     }
+
 	// TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
         return null;

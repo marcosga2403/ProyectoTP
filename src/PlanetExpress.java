@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -29,13 +30,12 @@ public class PlanetExpress {
      * @param maxEnviosPorCliente Máximo número de envíos por cliente.
      */
     public PlanetExpress(int maxPuertosEspaciales, int maxNaves, int maxPortes, int maxClientes, int maxEnviosPorCliente) {
-
-
-
-
-
+        this.maxPuertosEspaciales = maxPuertosEspaciales;
+        this.maxNaves = maxNaves;
+        this.maxPortes = maxPortes;
+        this.maxClientes = maxClientes;
+        this.maxEnviosPorCliente = maxEnviosPorCliente;
     }
-
 
     /**
      * TODO: Metodo para leer los datos de los ficheros específicados en el enunciado y los agrega a
@@ -47,9 +47,11 @@ public class PlanetExpress {
      * @param ficheroEnvios
      */
     public void cargarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-
-
-
+        this.listaPuertosEspaciales = ListaPuertosEspaciales.leerPuertosEspacialesCsv(ficheroPuertos,this.maxPuertosEspaciales);
+        this.listaNaves = ListaNaves.leerNavesCsv(ficheroNaves, this.maxNaves);
+        this.listaPortes = ListaPortes.leerPortesCsv(ficheroPortes, this.maxPortes, listaPuertosEspaciales, listaNaves);
+        this.listaClientes = ListaClientes.leerClientesCsv(ficheroClientes, maxClientes, maxEnviosPorCliente);
+        ListaEnvios.leerEnviosCsv(ficheroEnvios, listaPortes, listaClientes);
     }
 
 

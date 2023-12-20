@@ -36,16 +36,19 @@ public class Cliente {
     public String getEmail() {
         return email;
     }
+
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
     public String toString() {
         return this.nombre+" "+this.apellidos+", "+this.email;
     }
+
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
         if(listaEnvios.estaLlena()){
             return true;
         }else return false;
     }
+
     // TODO: Devuelve un envío en función de su posición
     public Envio getEnvio(int i) {
         return listaEnvios.getEnvio(i);
@@ -53,23 +56,26 @@ public class Cliente {
     public ListaEnvios getListaEnvios() {
         return listaEnvios;
     }
+
     // TODO: Añade un envío al cliente
     public boolean aniadirEnvio(Envio envio) {
-
         return listaEnvios.insertarEnvio(envio);
-
     }
+
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
+
     // TODO: Elimina el envío de la lista de envíos del pasajero
     public boolean cancelarEnvio(String localizador) {
         return listaEnvios.eliminarEnvio(localizador);
     }
+
     public void listarEnvios() {
         listaEnvios.listarEnvios();
     }
     // Encapsula la funcionalidad seleccionarEnvio de ListaEnvios
+
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         return listaEnvios.seleccionarEnvio(teclado, mensaje);
     }

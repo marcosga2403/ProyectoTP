@@ -19,8 +19,7 @@ public class ListaEnvios {
      * @param capacidad
      */
     public ListaEnvios(int capacidad) {
-		
-
+        this.envios = new Envio[capacidad];
     }
     // TODO: Devuelve el número de envíos que hay en la lista
     public int getOcupacion() {
@@ -56,8 +55,10 @@ public class ListaEnvios {
             if(envios[i] == null){
                 envios[i] = envio;
                 envios[i].getPorte().ocuparHueco(envio);
-            }return true;
-        }return false;
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -67,7 +68,7 @@ public class ListaEnvios {
      */
     public Envio buscarEnvio(String localizador) {
         for (int i= 0; i< envios.length; i++){
-            if (envios[i].getLocalizador() == localizador){
+            if (envios[i].getLocalizador().equals(localizador)){
                 return envios[i];
             }
         }
@@ -83,7 +84,7 @@ public class ListaEnvios {
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
         for (int i = 0; i< envios.length; i++){
-            if ((envios[i].getColumna() == columna) && (envios[i].getFila() == fila) && (envios[i].getPorte().getID() == idPorte)){
+            if ((envios[i].getColumna() == columna) && (envios[i].getFila() == fila) && (envios[i].getPorte().getID().equals(idPorte))){
                 return envios[i];
             }
         }
@@ -97,7 +98,7 @@ public class ListaEnvios {
      */
     public boolean eliminarEnvio (String localizador) {
         for (int i = 0; i < envios.length; i++){
-            if (envios[i].getLocalizador() == localizador){
+            if (envios[i].getLocalizador().equals(localizador)){
                 envios[i].cancelar();
                 return true;
             }
@@ -130,7 +131,7 @@ public class ListaEnvios {
             localizador = teclado.nextLine();
 
         }while (buscarEnvio(localizador)==null);
-        Envio envio = buscarEnvio(localizador)
+        Envio envio = buscarEnvio(localizador);
         return envio;
     }
 
@@ -144,12 +145,18 @@ public class ListaEnvios {
     public boolean aniadirEnviosCsv(String fichero) {
         PrintWriter pw = null;
         try {
-
+            FileWriter fileWriter = new FileWriter(fichero, true);
+            pw = new PrintWriter(fileWriter);
+            for (int i = 0; i < envios.length; i++){
+                pw.println(envios[i].toString());
+            }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-
+            if (pw != null){
+                pw.close();
+            }
         }
     }
 
@@ -162,6 +169,18 @@ public class ListaEnvios {
     public static void leerEnviosCsv(String ficheroEnvios, ListaPortes portes, ListaClientes clientes) {
         Scanner sc = null;
         try {
+            sc = new Scanner(new File(ficheroEnvios));
+            sc.useDelimiter(";");
+            while (sc.hasNext()){
+                String localizador = sc.next();
+                Porte porte = portes.buscarPorte(sc.next());
+                Cliente cliente = clientes.buscarClienteEmail(sc.next());
+                int fila = sc.nextInt();
+                int columnas = sc.nextInt();
+                double precio = sc.nextDouble();
+                Envio envio = new Envio(localizador, porte, cliente, fila, columnas, precio);
+                insertarEnvio(envio);
+            }
 
         } catch (FileNotFoundException e) {
             System.out.println("No se ha encontrado el fichero de envíos");

@@ -147,7 +147,8 @@ public class Porte {
      * @return
      */
     public boolean desocuparHueco(String localizador) {
-
+        huecos[];
+        listaEnvios.eliminarEnvio(localizador);
         return false;
     }
 
@@ -193,8 +194,12 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        System.out.print("  ");
-
+        for (int i = 0; i < huecos.length; i++) {
+            for (int j = 0; j < huecos[i].length; j++) {
+                System.out.print(" " + huecos[i][j]);
+            }
+            System.out.print("  ");
+        }
     }
 
     /**

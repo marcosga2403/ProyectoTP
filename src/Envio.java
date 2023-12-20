@@ -149,12 +149,13 @@ public class Envio {
 
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
     public String toString() {
-        return "Envio " + getLocalizador() + "para Porte " + getPorte() + "de " + porte.getOrigen() + porte.getSalida() +
-                "a " + porte.getDestino() + "en hueco " + getHueco() + "por " + getPrecio();
+        return "Envio " + getLocalizador() + " para Porte " + getPorte() + " de " + porte.getOrigen() + porte.getSalida() +
+                " a " + porte.getDestino() + " en hueco " + getHueco() + " por " + getPrecio();
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
-        porte.
+        cliente.cancelarEnvio(getLocalizador());
+
     }
 
     /**
