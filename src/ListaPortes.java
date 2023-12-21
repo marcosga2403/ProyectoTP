@@ -54,7 +54,7 @@ public class ListaPortes {
         for (int i = 0; i<portes.length; i++){
             if(portes[i] == null){
                 portes[i] = porte;
-                portes[i].ocuparHueco();
+                portes[i].ocuparHueco(); /* se puede borrar esta linea?*/
                 return true;
             }
         }

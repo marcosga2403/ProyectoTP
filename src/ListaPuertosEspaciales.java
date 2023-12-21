@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -17,23 +18,31 @@ public class ListaPuertosEspaciales {
      * @param capacidad
      */
     public ListaPuertosEspaciales(int capacidad) {
-        
-		
+        this.lista = new PuertoEspacial[capacidad];
     }
 
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
-
+        for (int i = 0; i < lista.length; i++){
+            if (lista[i] == null){
+                return i;
+            }
+        }
+        return lista.length;
     }
 
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        for(int i = 0; i < lista.length; i++){
+            if(lista[i] == null){
+                return false;
+            }
+        }return true;
     }
 
 	// TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
-        return null;
+        return lista[i];
     }
 
     /**
@@ -42,7 +51,13 @@ public class ListaPuertosEspaciales {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-
+        for (int i = 0; i<lista.length; i++){
+            if(lista[i] == null){
+                lista[i] = puertoEspacial;
+                lista[i].get().ocuparHueco(lista);/*no hace falta esto no?*/
+                return true;
+            }
+        }
         return false;
     }
 
@@ -52,7 +67,11 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-
+        for (int i= 0; i< lista.length; i++){
+            if (lista[i].getCodigo().equals(codigo)){
+                return lista[i];
+            }
+        }
         return null;
     }
 
@@ -79,12 +98,17 @@ public class ListaPuertosEspaciales {
     public boolean escribirPuertosEspacialesCsv(String nombre) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(new File(nombre));
+            for (int i = 0; i < lista.length; i++){
+                pw.println(lista[i].toString());
+            }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-
+            if (pw != null){
+                pw.close();
+            }
         }
     }
 
