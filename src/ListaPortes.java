@@ -19,9 +19,7 @@ public class ListaPortes {
      * @param capacidad
      */
     public ListaPortes(int capacidad) {
-        
-		
-		
+        this.portes = new Porte[capacidad];
     }
     // TODO: Devuelve el número de portes que hay en la lista
     public int getOcupacion() {
@@ -70,7 +68,11 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-
+        for (int i= 0; i< portes.length; i++){
+            if (portes[i].getID().equals(id)){
+                return portes[i];
+            }
+        }
         return null;
     }
 
@@ -83,7 +85,7 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        
+
 
         return listaPortes;
     }
@@ -92,7 +94,9 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-
+        for (int i =0; i<= portes.length; i++){
+            System.out.println(portes[i].toString());
+        }
     }
 
 
