@@ -27,7 +27,7 @@ public class  Porte {
 
     /**
      * TODO: Completa el constructo de la clase
-     * 
+     *
      * @param id
      * @param nave
      * @param origen
@@ -327,10 +327,14 @@ public class  Porte {
                 System.out.println("Ingrese precio de pesaje:");
                 precioPesaje = teclado.nextDouble();
             }
-            Porte porte = new Porte(id,nave,puertoEspacialSeleccionadoOrigen,muelleOrigen,
+            System.out.println("Porte "+id+ " creado correctamente.");
+            return new Porte(id,nave,puertoEspacialSeleccionadoOrigen,muelleOrigen,
                     fechaSalida,puertoEspacialSeleccionadoDestino
                     ,terminalDestino,fechaLLegada,precioPesaje);
-            System.out.println("Porte "+porte.getID()+ " creado correctamente.");
+        }
+        else {
+            System.out.println("No se pueden dar de alta más vuelos.");
+        return null;
         }
     }
 }
