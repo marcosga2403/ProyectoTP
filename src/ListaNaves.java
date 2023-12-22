@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -122,12 +123,17 @@ public class ListaNaves {
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(new File(nombre));
+            for (int i = 0; i < naves.length; i++) {
+                pw.println(naves[i].toString());
+            }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-
+            if (pw != null) {
+                pw.close();
+            }
         }
     }
 
@@ -139,14 +145,26 @@ public class ListaNaves {
      * @return
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
-        ListaNaves listaNaves = new ListaNaves(capacidad);
         Scanner sc = null;
+        ListaNaves listaNaves = new ListaNaves(capacidad);
         try {
-
+            sc = new Scanner(new File(fichero));
+            sc.useDelimiter(";");
+            while (sc.hasNext()) {
+                String marca = sc.next();
+                String modelo = sc.next();
+                String matricula = sc.next();
+                int filas = sc.nextInt();
+                int columnas = sc.nextInt();
+                int alcance = sc.nextInt();
+                listaNaves.insertarNave(new Nave(marca, modelo, matricula, columnas, filas, alcance));
+            }
         } catch (Exception e) {
             return null;
         } finally {
-
+            if (sc != null) {
+                sc.close();
+            }
         }
         return listaNaves;
     }

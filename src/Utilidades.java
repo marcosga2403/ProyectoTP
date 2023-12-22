@@ -133,9 +133,6 @@ public class Utilidades {
              minuto = teclado.nextInt();
              segundo = teclado.nextInt();
         }while ((mes>12||mes<0)||(numeroDeDiasMes(mes)==31 && dia>31||dia<0)||(mes==2 && dia>28||dia<0)||(esBisiesto(anio)==true && mes==2 && dia>29||dia<0)||(numeroDeDiasMes(mes)==30 && dia>30||dia<0)||(hora>24||hora<0)||(minuto > 60 || minuto < 0)||(segundo>60||segundo<60) );
-
-
-
         return new Fecha(dia, mes, anio, hora, minuto, segundo);
     }
     public static boolean esBisiesto (int anio){
