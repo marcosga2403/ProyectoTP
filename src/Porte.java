@@ -252,19 +252,19 @@ public class  Porte {
      */
     public static Porte altaPorte(Scanner teclado, Random rand,
                                   ListaPuertosEspaciales puertosEspaciales,
-                                  ListaNaves naves,
-                                  ListaPortes portes) {
+                                  ListaNaves naves, ListaPortes portes) {
+        String id;
+        do {
+            id = generarID(rand);
 
+        }while (portes.buscarPorte(id)==null);
+        System.out.println("Introduce la matrícula de la nave: ");
+        String matricula = teclado.nextLine();
+        System.out.println("Introduce el código del puerto espacial del que sale la nave: ");
+        String codigo = teclado.nextLine();
+        puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles();
+        puertosEspaciales.buscarP
 
-        String id = generarID(rand);
-        System.out.print("");
-        int numero = teclado.nextInt();
-        while (id.equals()) ) {
-            System.out.println("Numero incorrecto.");
-            System.out.print("Introduce un numero entre el " + minimo + " y el " + maximo + ": ");
-            numero = teclado.nextInt();
-        }
-        return numero;
-        return null;
+        return new Porte(id,naves.buscarNave(matricula),puertosEspaciales.buscarPuertoEspacial(codigo),puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles(),salida,);
     }
 }
