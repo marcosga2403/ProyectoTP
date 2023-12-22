@@ -311,50 +311,26 @@ public class  Porte {
                 System.out.println("Ingrese matrícula de la nave:");
                 matricula = teclado.nextLine();
             }
+            Nave nave = naves.buscarNave(matricula);
 
+            Fecha fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
+            Fecha fechaLLegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
+            while (fechaLLegada.anterior(fechaSalida)) {
+                System.out.println("Llegada debe ser posterior a salida.");
+                fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
+                fechaLLegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
+            }
 
-            System.out.println("Introduzca la fecha de salida:");
-            String fechaSalida = teclado.nextLine();
-            System.out.println("Ingrese día:");
-            String diaSalida = teclado.nextLine();
-            System.out.println("Ingrese mes:");
-            String mesSalida = teclado.nextLine();
-            System.out.println("Ingrese año:");
-            String añoSalida = teclado.nextLine();
-            System.out.println("Ingrese hora:");
-            String horaSalida = teclado.nextLine();
-            System.out.println("Ingrese minuto:");
-            String minutoSalida = teclado.nextLine();
-            System.out.println("Ingrese segundo:");
-            String segundoSalida = teclado.nextLine();
-            System.out.println("Introduzca la fecha de llegada:");
-            String fechaLlegada = teclado.nextLine();
-            System.out.println("Ingrese día:");
-            String diaLlegada = teclado.nextLine();
-            System.out.println("Ingrese mes:");
-            String mesLlegada = teclado.nextLine();
-            System.out.println("Ingrese año:");
-            String añoLlegada = teclado.nextLine();
-            System.out.println("Ingrese hora:");
-            String horaLlegada = teclado.nextLine();
-            System.out.println("Ingrese minuto:");
-            String minutoLlegada = teclado.nextLine();
-            System.out.println("Ingrese segundo:");
-            String segundoLlegada = teclado.nextLine();
-
-
-            System.out.println("Llegada debe ser posterior a salida.");
-
-
-            System.out.println("Introduce el código del puerto espacial del que sale la nave: ");
-            String codigo = teclado.nextLine();
-            puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles();
-            puertosEspaciales.buscarP
-
-            return new Porte(id, naves.buscarNave(matricula), puertosEspaciales.buscarPuertoEspacial(codigo), puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles(), salida, );
-        }
-        else{
-            System.out.println("No se pueden dar de alta más vuelos.");
+            System.out.println("Ingrese precio de pesaje:");
+            double precioPesaje = teclado.nextDouble();
+            while (precioPesaje > 0){
+                System.out.println("Ingrese precio de pesaje:");
+                precioPesaje = teclado.nextDouble();
+            }
+            Porte porte = new Porte(id,nave,puertoEspacialSeleccionadoOrigen,muelleOrigen,
+                    fechaSalida,puertoEspacialSeleccionadoDestino
+                    ,terminalDestino,fechaLLegada,precioPesaje);
+            System.out.println("Porte "+porte.getID()+ " creado correctamente.");
         }
     }
 }

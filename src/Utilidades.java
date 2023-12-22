@@ -126,21 +126,31 @@ public class Utilidades {
         int segundo;
         do {
             System.out.println(mensaje);
-             dia = teclado.nextInt();
-             mes = teclado.nextInt();
-             anio = teclado.nextInt();
-             hora = teclado.nextInt();
-             minuto = teclado.nextInt();
-             segundo = teclado.nextInt();
+            System.out.println("Ingrese dia");
+            dia = teclado.nextInt();
+            System.out.println("Ingrese mes");
+            mes = teclado.nextInt();
+            System.out.println("Ingrese anio");
+            anio = teclado.nextInt();
+            System.out.println("Ingrese hora");
+            hora = teclado.nextInt();
+            System.out.println("Ingrese minuto");
+            minuto = teclado.nextInt();
+            System.out.println("Ingrese segundo");
+            segundo = teclado.nextInt();
         }while ((mes>12||mes<0)||(numeroDeDiasMes(mes)==31 && dia>31||dia<0)||(mes==2 && dia>28||dia<0)||(esBisiesto(anio)==true && mes==2 && dia>29||dia<0)||(numeroDeDiasMes(mes)==30 && dia>30||dia<0)||(hora>24||hora<0)||(minuto > 60 || minuto < 0)||(segundo>60||segundo<60) );
         return new Fecha(dia, mes, anio, hora, minuto, segundo);
     }
+
+
     public static boolean esBisiesto (int anio){
         if ((anio % 4 == 0) && ((anio % 100 != 0) || (anio % 400 == 0)))
             return true;
         else
             return false;
     }
+
+
     public static int numeroDeDiasMes(int mes) {
 
         int numeroDias = -1;
