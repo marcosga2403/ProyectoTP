@@ -238,7 +238,7 @@ public class Envio {
      * @param rand
      * @param porte
      * @param cliente
-     * @return Envio para el porte y cliente especificados
+     * @return Envio para el porte y cliente especificados.
      */
 
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
