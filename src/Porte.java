@@ -38,8 +38,7 @@ public class  Porte {
      * @param llegada
      * @param precio
      */
-    public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio,
-                 int tamPortesX, int tamPortesY) {
+    public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio) {
         this.id = id;
         this.nave = nave;
         this.origen = origen;
@@ -49,7 +48,7 @@ public class  Porte {
         this.muelleDestino = muelleDestino;
         this.llegada = llegada;
         this.precio = precio;
-        this.huecos = new boolean[tamPortesX][tamPortesY];
+        this.huecos = new boolean[nave.getFilas()][nave.getColumnas()];
     }
 
     public String getID() {
@@ -182,7 +181,7 @@ public class  Porte {
      * @return
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        if(this.origen.getCodigo()==codigoOrigen && this.destino.getCodigo()==codigoDestino && (this.salida.coincide(fecha)== true || this.llegada.coincide(fecha) == true)) {
+        if(this.origen.getCodigo().equals(codigoOrigen) && this.destino.getCodigo().equals(codigoDestino) && (this.salida.coincide(fecha)== true || this.llegada.coincide(fecha) == true)) {
             return true;
         }else return false;
     }

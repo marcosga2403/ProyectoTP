@@ -115,6 +115,7 @@ public class ListaPortes {
         String id;
         cancelar = null;
         do {
+
             System.out.println(mensaje);
             id = teclado.nextLine();
         }while (buscarPorte(id)==null);
@@ -156,7 +157,21 @@ public class ListaPortes {
         ListaPortes listaPortes = new ListaPortes(capacidad);
         try {
             sc = new Scanner(new File(fichero));
-
+            sc.useDelimiter(";");
+            while (sc.hasNext()) {
+                String id = sc.next();
+                String matricula = sc.next();
+                String codOrigen = sc.next();
+                String muelleOrigen = sc.next();
+                String salida = sc.next();
+                String codDestino = sc.next();
+                String muelleDestino = sc.next();
+                String llegada = sc.next();
+                String precio = sc.next();
+                listaPortes.insertarPorte(new Porte(id,naves.buscarNave(matricula),
+                        puertosEspaciales.buscarPuertoEspacial(codOrigen),muelleOrigen,salida,
+                        puertosEspaciales.buscarPuertoEspacial(codDestino),muelleDestino,llegada,precio));
+            }
         } catch (Exception e) {
             return null;
         }
