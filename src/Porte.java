@@ -135,11 +135,11 @@ public class  Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
-        if (huecos[envio.getFila()][envio.getColumna()] == false) {
-            huecoOcupado(envio.getFila() , envio.getColumna());
-            return true;
+        if (huecoOcupado(envio.getFila() , envio.getColumna())) {
+            return false;
         }
-        return false;
+        huecos[envio.getFila()][envio.getColumna()] = true;
+        return true;
     }
 
     /**
@@ -148,7 +148,8 @@ public class  Porte {
      * @return
      */
     public boolean desocuparHueco(String localizador) {
-        huecos[];
+        Envio envio = this.listaEnvios.buscarEnvio(localizador);
+        huecos[envio.getFila()][envio.getColumna()] = false;
         listaEnvios.eliminarEnvio(localizador);
         return false;
     }
