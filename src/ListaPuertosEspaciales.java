@@ -85,7 +85,6 @@ public class ListaPuertosEspaciales {
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial = null;
 
-
         return puertoEspacial;
     }
 
@@ -123,11 +122,23 @@ public class ListaPuertosEspaciales {
         ListaPuertosEspaciales listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
         Scanner sc = null;
         try {
-
+            sc = new Scanner(new File(fichero));
+            sc.useDelimiter(";");
+            while (sc.hasNext()) {
+                String nombre = sc.next();
+                String codigo = sc.next();
+                double radio = sc.nextDouble();
+                double azimut = sc.nextDouble();
+                double polar = sc.nextDouble();
+                int muelles = sc.nextInt();
+                listaPuertosEspaciales.insertarPuertoEspacial(new PuertoEspacial(nombre, codigo, radio, azimut, polar, muelles));
+            }
         } catch (Exception e) {
             return null;
         } finally {
-
+            if (sc != null) {
+                sc.close();
+            }
         }
         return listaPuertosEspaciales;
     }

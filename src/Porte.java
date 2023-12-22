@@ -253,18 +253,108 @@ public class  Porte {
     public static Porte altaPorte(Scanner teclado, Random rand,
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves, ListaPortes portes) {
-        String id;
-        do {
-            id = generarID(rand);
 
-        }while (portes.buscarPorte(id)==null);
-        System.out.println("Introduce la matrícula de la nave: ");
-        String matricula = teclado.nextLine();
-        System.out.println("Introduce el código del puerto espacial del que sale la nave: ");
-        String codigo = teclado.nextLine();
-        puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles();
-        puertosEspaciales.buscarP
+        if(!portes.estaLlena()) {
+            String id;
+            do {
+                id = generarID(rand);
+                System.out.println("");
+            } while (portes.buscarPorte(id) == null);
 
-        return new Porte(id,naves.buscarNave(matricula),puertosEspaciales.buscarPuertoEspacial(codigo),puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles(),salida,);
+            System.out.println("Ingrese código de puerto Origen:");
+            String codePuertoOrigen = teclado.nextLine();
+            PuertoEspacial puertoEspacialSeleccionadoOrigen = puertosEspaciales.buscarPuertoEspacial(codePuertoOrigen);
+            while (puertoEspacialSeleccionadoOrigen == null) {
+                System.out.println("Código de puerto no encontrado.\n");
+                System.out.print("Ingrese código de puerto Origen:");
+                codePuertoOrigen = teclado.nextLine();
+                puertoEspacialSeleccionadoOrigen = puertosEspaciales.buscarPuertoEspacial(codePuertoOrigen);
+            }
+
+            int numMuelles = puertoEspacialSeleccionadoOrigen.getMuelles();
+            System.out.println("Ingrese el muelle de Origen (1 -" + numMuelles + "):");
+            int muelleOrigen = teclado.nextInt();
+            while (muelleOrigen > numMuelles || muelleOrigen <= 0) {
+                System.out.println("Ingrese el muelle de Origen (1 -" + numMuelles + "):");
+                muelleOrigen = teclado.nextInt();
+            }
+
+            System.out.println("Ingrese código de puerto Destino:");
+            String codePuertoDestino = teclado.nextLine();
+            PuertoEspacial puertoEspacialSeleccionadoDestino = puertosEspaciales.buscarPuertoEspacial(codePuertoDestino);
+            while (puertoEspacialSeleccionadoDestino == null) {
+                System.out.println("Código de puerto no encontrado.\n");
+                System.out.print("Ingrese código de puerto Destino:");
+                codePuertoDestino = teclado.nextLine();
+                puertoEspacialSeleccionadoDestino = puertosEspaciales.buscarPuertoEspacial(codePuertoDestino);
+            }
+
+            int numMuellesTerminalDestino = puertoEspacialSeleccionadoDestino.getMuelles();
+            System.out.println("Ingrese Terminal Destino (1 -" + numMuellesTerminalDestino + "):");
+            int terminalDestino = teclado.nextInt();
+            while (terminalDestino > numMuelles || terminalDestino <= 0) {
+                System.out.println("Ingrese Terminal Destino (1 -" + numMuellesTerminalDestino + "):");
+                terminalDestino = teclado.nextInt();
+            }
+
+            naves.mostrarNaves();
+
+            System.out.println("Ingrese matrícula de la nave:");
+            String matricula = teclado.nextLine();
+            double distanciaEntrePuertos = puertoEspacialSeleccionadoOrigen.distancia(puertoEspacialSeleccionadoDestino);
+            while (naves.buscarNave(matricula) == null || (naves.buscarNave(matricula) != null && naves.buscarNave(matricula).getAlcance() < distanciaEntrePuertos)) {
+                if (naves.buscarNave(matricula) == null) {
+                    System.out.println("Matricula de avión no encontrada:");
+                } else {
+                    System.out.println("Avión selecionado con alcance insuficiente:");
+                }
+                System.out.println("Ingrese matrícula de la nave:");
+                matricula = teclado.nextLine();
+            }
+
+
+            System.out.println("Introduzca la fecha de salida:");
+            String fechaSalida = teclado.nextLine();
+            System.out.println("Ingrese día:");
+            String diaSalida = teclado.nextLine();
+            System.out.println("Ingrese mes:");
+            String mesSalida = teclado.nextLine();
+            System.out.println("Ingrese año:");
+            String añoSalida = teclado.nextLine();
+            System.out.println("Ingrese hora:");
+            String horaSalida = teclado.nextLine();
+            System.out.println("Ingrese minuto:");
+            String minutoSalida = teclado.nextLine();
+            System.out.println("Ingrese segundo:");
+            String segundoSalida = teclado.nextLine();
+            System.out.println("Introduzca la fecha de llegada:");
+            String fechaLlegada = teclado.nextLine();
+            System.out.println("Ingrese día:");
+            String diaLlegada = teclado.nextLine();
+            System.out.println("Ingrese mes:");
+            String mesLlegada = teclado.nextLine();
+            System.out.println("Ingrese año:");
+            String añoLlegada = teclado.nextLine();
+            System.out.println("Ingrese hora:");
+            String horaLlegada = teclado.nextLine();
+            System.out.println("Ingrese minuto:");
+            String minutoLlegada = teclado.nextLine();
+            System.out.println("Ingrese segundo:");
+            String segundoLlegada = teclado.nextLine();
+
+
+            System.out.println("Llegada debe ser posterior a salida.");
+
+
+            System.out.println("Introduce el código del puerto espacial del que sale la nave: ");
+            String codigo = teclado.nextLine();
+            puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles();
+            puertosEspaciales.buscarP
+
+            return new Porte(id, naves.buscarNave(matricula), puertosEspaciales.buscarPuertoEspacial(codigo), puertosEspaciales.buscarPuertoEspacial(codigo).getMuelles(), salida, );
+        }
+        else{
+            System.out.println("No se pueden dar de alta más vuelos.");
+        }
     }
 }
