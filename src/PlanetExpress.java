@@ -65,9 +65,11 @@ public class PlanetExpress {
      * @param ficheroEnvios
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-
-
-
+        this.listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos);
+        this.listaNaves.escribirNavesCsv(ficheroNaves);
+        this.listaPortes.escribirPortesCsv(ficheroPortes);
+        this.listaClientes.escribirClientesCsv(ficheroClientes);
+        ListaEnvios listaEnvios = this.listaClientes.getCliente(1).getListaEnvios();
     }
     public boolean maxPortesAlcanzado() {
         return listaPortes.estaLlena();
@@ -123,7 +125,27 @@ public class PlanetExpress {
      * @return opción seleccionada
      */
     public static int menu(Scanner teclado) {
-
+        int opcion = teclado.nextInt();
+        switch (opcion){
+            case 0:
+                System.out.println("1. Alta de Porte");;
+                break;
+            case 1:
+                System.out.println("2. Alta de Cliente");
+                break;
+            case 2:
+                System.out.println("3. Buscar Porte");
+                break;
+            case 3:
+                System.out.println("4. Mostrar envíos de un cliente");
+                break;
+            case 4:
+                System.out.println("5. Generar lista de envíos");
+                break;
+            case 5:
+                System.out.println("0. Salir");
+                break;
+        }return opcion;
     }
 
     /**

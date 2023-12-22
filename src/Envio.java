@@ -155,7 +155,7 @@ public class Envio {
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
         cliente.cancelarEnvio(getLocalizador());
-
+        return false;
     }
 
     /**
@@ -221,7 +221,6 @@ public class Envio {
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
         localizador.append(rand.n)
-
 
         return localizador.toString();
     }
