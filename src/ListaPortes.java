@@ -84,10 +84,10 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha){
-
-
-
-
+        for (int i = 0; i<portes.length; i++){
+            if ((portes[i].getOrigen().equals(codigoOrigen) && (portes[i].getDestino().equals(codigoDestino)) && (portes[i].getLlegada().equals(fecha)))){
+            }
+        }
         return new ListaPortes(portes.length);
     }
 

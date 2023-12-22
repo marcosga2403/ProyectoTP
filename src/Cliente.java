@@ -104,13 +104,6 @@ public class Cliente {
             System.out.println("Introduzca su email: ");
             email = teclado.nextLine();
         }while (clientes.buscarClienteEmail(email)!=null);
-
-
-
-
-
-
-
         return new Cliente(nombre, apellidos, email, maxEnvios);
     }
 

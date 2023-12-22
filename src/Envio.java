@@ -242,7 +242,6 @@ public class Envio {
      */
 
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-
         String localizador;
         int fila;
         int columna;
@@ -254,8 +253,6 @@ public class Envio {
         fila = teclado.nextInt();
         columna = teclado.nextInt();
         precio = porte.getPrecio();
-
-
 
         return new Envio(localizador,porte,cliente,fila,columna,precio);
     }
