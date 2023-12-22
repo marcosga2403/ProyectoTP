@@ -54,7 +54,6 @@ public class ListaPuertosEspaciales {
         for (int i = 0; i<lista.length; i++){
             if(lista[i] == null){
                 lista[i] = puertoEspacial;
-                lista[i].get().ocuparHueco(lista);/*no hace falta esto no?*/
                 return true;
             }
         }

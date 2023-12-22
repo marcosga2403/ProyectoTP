@@ -94,8 +94,6 @@ public class PlanetExpress {
      */
     public ListaPortes buscarPorte(Scanner teclado) {
 
-
-
         return listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
     }
 
@@ -145,7 +143,8 @@ public class PlanetExpress {
             case 5:
                 System.out.println("0. Salir");
                 break;
-        }return opcion;
+        }
+        return opcion;
     }
 
     /**
@@ -171,17 +170,17 @@ public class PlanetExpress {
             System.out.println("Número de argumentos incorrecto");
             return;
         }
-
-
+        Scanner teclado = new Scanner(System.in);
+        int opcion = -1;
         do {
             opcion = menu(teclado);
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
-
+                    System.out.println("Ingrese código de puerto Origen:");
+                    int codigoPuertoOrigen;
 
                     break;
                 case 2:     // TODO: Alta de Cliente
-
 
                     break;
                 case 3:     // TODO: Buscar Porte
