@@ -83,10 +83,12 @@ public class ListaPortes {
      * @param fecha
      * @return
      */
-    public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
+    public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha){
 
 
-        return listaPortes;
+
+
+        return new ListaPortes(portes.length);
     }
 
     /**
@@ -111,6 +113,7 @@ public class ListaPortes {
      */
     public Porte seleccionarPorte(Scanner teclado, String mensaje, String cancelar) {
         String id;
+        cancelar = null;
         do {
             System.out.println(mensaje);
             id = teclado.nextLine();
