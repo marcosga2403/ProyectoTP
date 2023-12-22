@@ -130,11 +130,6 @@ public class PlanetExpress {
             String email = teclado.nextLine();
             porte.ocuparHueco(Envio.altaEnvio(teclado,rand,porte,listaClientes.buscarClienteEmail(email)));
             porte.imprimirMatrizHuecos();
-
-
-
-
-
         }
     }
 

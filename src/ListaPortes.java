@@ -149,8 +149,10 @@ public class ListaPortes {
      * @return
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
+        Scanner sc = null;
         ListaPortes listaPortes = new ListaPortes(capacidad);
         try {
+            sc = new Scanner(new File(fichero));
 
         } catch (Exception e) {
             return null;
