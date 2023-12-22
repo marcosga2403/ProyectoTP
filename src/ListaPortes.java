@@ -162,12 +162,24 @@ public class ListaPortes {
                 String id = sc.next();
                 String matricula = sc.next();
                 String codOrigen = sc.next();
-                String muelleOrigen = sc.next();
-                String salida = sc.next();
+                int muelleOrigen = sc.nextInt();
+                String stringSalida = sc.next();
+                int salidaNumDia = stringSalida.indexOf(0,2);
+                int salidaNumMes = stringSalida.indexOf(3,5);
+                int salidaNumAnio = stringSalida.indexOf(6,9);
+                int salidaNumHora = stringSalida.indexOf(11,13);
+                int salidaNumMin = stringSalida.indexOf(14,15);
+                Fecha salida = new Fecha(salidaNumDia, salidaNumMes, salidaNumAnio, salidaNumHora, salidaNumMin, 0);
                 String codDestino = sc.next();
-                String muelleDestino = sc.next();
-                String llegada = sc.next();
-                String precio = sc.next();
+                int muelleDestino = sc.nextInt();;
+                String stringLlegada = sc.next();
+                int salidaNumDia2 = stringLlegada.indexOf(0,2);
+                int salidaNumMes2 = stringLlegada.indexOf(3,5);
+                int salidaNumAnio2 = stringLlegada.indexOf(6,9);
+                int salidaNumHora2 = stringLlegada.indexOf(11,13);
+                int salidaNumMin2 = stringLlegada.indexOf(14,15);
+                Fecha llegada = new Fecha(salidaNumDia2, salidaNumMes2, salidaNumAnio2, salidaNumHora2, salidaNumMin2, 0);
+                int precio = sc.nextInt();
                 listaPortes.insertarPorte(new Porte(id,naves.buscarNave(matricula),
                         puertosEspaciales.buscarPuertoEspacial(codOrigen),muelleOrigen,salida,
                         puertosEspaciales.buscarPuertoEspacial(codDestino),muelleDestino,llegada,precio));
