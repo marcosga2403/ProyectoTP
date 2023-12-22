@@ -110,7 +110,11 @@ public class ListaPortes {
      * @return
      */
     public Porte seleccionarPorte(Scanner teclado, String mensaje, String cancelar) {
-        listarPortes();
+        String id;
+        do {
+            System.out.println(mensaje);
+            id = teclado.nextLine();
+        }while (buscarPorte(id)==null);
         Porte porte = null;
 
         return porte;
