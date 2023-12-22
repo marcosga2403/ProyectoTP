@@ -1,5 +1,7 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ import java.util.Scanner;
  * @author
  * @version     1.0
  */
-public class Porte {
+public class  Porte {
     private boolean[][] huecos;
     private String id;
     private Nave nave;
@@ -213,7 +215,10 @@ public class Porte {
     public boolean generarListaEnvios(String fichero) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(new File(fichero));
+            for (int i = 0; i < listaEnvios.getOcupacion(); i++){
+                pw.println(listaEnvios.getEnvio(i).toString());
+            }
             return true;
         } catch (FileNotFoundException e) {
             return false;
@@ -249,6 +254,8 @@ public class Porte {
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
+
+
         String id = generarID(rand);
         System.out.print("");
         int numero = teclado.nextInt();
