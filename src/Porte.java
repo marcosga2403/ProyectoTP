@@ -247,7 +247,15 @@ public class Porte {
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
-
+        String id = generarID(rand);
+        System.out.print("");
+        int numero = teclado.nextInt();
+        while (id.equals()) ) {
+            System.out.println("Numero incorrecto.");
+            System.out.print("Introduce un numero entre el " + minimo + " y el " + maximo + ": ");
+            numero = teclado.nextInt();
+        }
+        return numero;
         return null;
     }
 }
