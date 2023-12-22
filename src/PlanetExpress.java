@@ -69,7 +69,7 @@ public class PlanetExpress {
         this.listaNaves.escribirNavesCsv(ficheroNaves);
         this.listaPortes.escribirPortesCsv(ficheroPortes);
         this.listaClientes.escribirClientesCsv(ficheroClientes);
-        ListaEnvios listaEnvios = this.listaClientes.getCliente(1).getListaEnvios();
+        this.listaPortes.getPorte(1).generarListaEnvios(ficheroEnvios);
     }
     public boolean maxPortesAlcanzado() {
         return listaPortes.estaLlena();
@@ -176,16 +176,15 @@ public class PlanetExpress {
             opcion = menu(teclado);
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
+                    Porte.altaPorte(teclado, new Random(), listaPuertosEspaciales, this.listaNaves , this.listaPortes );
                     System.out.println("Ingrese código de puerto Origen:");
                     int codigoPuertoOrigen;
-
                     break;
                 case 2:     // TODO: Alta de Cliente
-
+                    Cliente.altaCliente(teclado, )
                     break;
                 case 3:     // TODO: Buscar Porte
-
-
+                    ListaPortes
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
 
