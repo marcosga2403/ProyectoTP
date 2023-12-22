@@ -242,10 +242,7 @@ public class Envio {
      */
 
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-        System.out.println("Elija una de las 2 opciones (1/2): \n1) Contratar envio como un cliente ya registrado\n2) Contratar envio como un nuevo cliente");
-        int opcion = teclado.nextInt();
-        if(opcion==2){
-            Cliente.altaCliente(teclado,);
+
         }
 
 
