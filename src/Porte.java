@@ -180,7 +180,9 @@ public class Porte {
      * @return
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        return ;
+        if(this.origen.getCodigo()==codigoOrigen && this.destino.getCodigo()==codigoDestino && (this.salida.coincide(fecha)== true || this.llegada.coincide(fecha) == true)) {
+            return true;
+        }else return false;
     }
 
 
