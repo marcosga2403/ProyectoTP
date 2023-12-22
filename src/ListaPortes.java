@@ -115,7 +115,6 @@ public class ListaPortes {
         String id;
         cancelar = null;
         do {
-
             System.out.println(mensaje);
             id = teclado.nextLine();
         }while (buscarPorte(id)==null);

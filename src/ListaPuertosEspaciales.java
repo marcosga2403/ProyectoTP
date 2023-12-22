@@ -83,8 +83,12 @@ public class ListaPuertosEspaciales {
      * @return
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
-        PuertoEspacial puertoEspacial = null;
-
+        String codigo;
+        do {
+            System.out.println(mensaje);
+            codigo = teclado.nextLine();
+        }while (buscarPuertoEspacial(codigo)==null);
+        PuertoEspacial puertoEspacial = buscarPuertoEspacial(codigo);
         return puertoEspacial;
     }
 

@@ -199,10 +199,10 @@ public class PlanetExpress {
                     int codigoPuertoOrigen;
                     break;
                 case 2:     // TODO: Alta de Cliente
-                    Cliente.altaCliente(teclado, )
+                    Cliente.altaCliente(teclado, listaClientes,  )
                     break;
                 case 3:     // TODO: Buscar Porte
-                    ListaPortes
+                    Porte porte =
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
 
