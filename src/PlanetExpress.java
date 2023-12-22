@@ -93,8 +93,21 @@ public class PlanetExpress {
      * @return
      */
     public ListaPortes buscarPorte(Scanner teclado) {
+        System.out.println("Introduce el origen del porte: ");
+        String origen = teclado.nextLine();
+        System.out.println("Introduce el destino del porte: ");
+        String destino = teclado.nextLine();
+        System.out.println("Introduce la fecha de salida del porte (dia/mes/año) (hora/minuto/segundo): ");
+        String fechaSalida = teclado.nextLine();
+        int dia = teclado.nextInt();
+        int mes = teclado.nextInt();
+        int anio = teclado.nextInt();
+        int hora = teclado.nextInt();
+        int minuto = teclado.nextInt();
+        int segundo = teclado.nextInt();
+        Fecha fecha = new Fecha(dia,mes,anio,hora,minuto,segundo);
 
-        return listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
+        return listaPortes.buscarPortes(origen,destino,fecha);
     }
 
 
@@ -108,6 +121,16 @@ public class PlanetExpress {
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         if (porte != null) {
+            System.out.println("Elija una de las 2 opciones: \n1) Contrataar el envío como un cliente ya registrado.\n2) Contratar el envío como un nuevo cliente.");
+            int opcion = teclado.nextInt();
+            if(opcion == 2){
+                Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
+            }
+            System.out.println("Introduzca su email para dar de alta su envío: ");
+            String email = teclado.nextLine();
+            porte.ocuparHueco(Envio.altaEnvio(teclado,rand,porte,listaClientes.buscarClienteEmail(email)));
+            porte.imprimirMatrizHuecos();
+
 
 
 
