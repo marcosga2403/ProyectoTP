@@ -132,7 +132,7 @@ public class ListaClientes {
             sc = new Scanner(new File(fichero));
             sc.useDelimiter(";");
             while (sc.hasNext()) {
-                String nombre = sc.next();
+                String nombre = sc.next().trim();
                 String apellidos = sc.next();
                 String email = sc.next();
                 listaClientes.insertarCliente(new Cliente(nombre, apellidos, email, maxEnviosPorCliente));

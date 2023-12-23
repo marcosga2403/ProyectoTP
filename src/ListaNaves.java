@@ -150,13 +150,13 @@ public class ListaNaves {
             sc = new Scanner(new File(fichero));
             sc.useDelimiter(";");
             while (sc.hasNext()) {
-                String marca = sc.next();
+                String marca = sc.next().trim();
                 String modelo = sc.next();
                 String matricula = sc.next();
-                int filas = sc.nextInt();
-                int columnas = sc.nextInt();
-                int alcance = sc.nextInt();
-                listaNaves.insertarNave(new Nave(marca, modelo, matricula, columnas, filas, alcance));
+                String filas = sc.next();
+                String columnas = sc.next();
+                String alcance = sc.next();
+                listaNaves.insertarNave(new Nave(marca, modelo, matricula, Integer.parseInt(columnas), Integer.parseInt(filas), Double.parseDouble(alcance)));
             }
         } catch (Exception e) {
             return null;

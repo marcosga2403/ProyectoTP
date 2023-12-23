@@ -129,13 +129,15 @@ public class ListaPuertosEspaciales {
             sc = new Scanner(new File(fichero));
             sc.useDelimiter(";");
             while (sc.hasNext()) {
-                String nombre = sc.next();
+                /* Uso .trim() que es un metodo de la clase string para borrar los espacios en blanco y que no lea el \r\n de cada linea del fichero */
+                String nombre = sc.next().trim();
                 String codigo = sc.next();
-                double radio = sc.nextDouble();
-                double azimut = sc.nextDouble();
-                double polar = sc.nextDouble();
-                int muelles = sc.nextInt();
-                listaPuertosEspaciales.insertarPuertoEspacial(new PuertoEspacial(nombre, codigo, radio, azimut, polar, muelles));
+                String radio = sc.next();
+                String azimut = sc.next();
+                String polar = sc.next();
+                String muelles = sc.next();
+                PuertoEspacial puerto = new PuertoEspacial(nombre, codigo, Double.parseDouble(radio), Double.parseDouble(azimut), Double.parseDouble(polar), Integer.parseInt(muelles));
+                listaPuertosEspaciales.insertarPuertoEspacial(puerto);
             }
         } catch (Exception e) {
             return null;

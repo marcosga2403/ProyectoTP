@@ -287,12 +287,44 @@ public class PlanetExpress {
                     }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
+                    planetExpress.listaPortes.listarPortes();
 
+                    String codigoPorteCase5 = Utilidades.leerCadena(teclado, "Seleccione un porte:");
 
+                    Porte porteCase5 = planetExpress.listaPortes.buscarPorte(codigoPorteCase5);
+
+                    while (codigoPorteCase5 != "CANCELAR" || porteCase5 == null){
+                        if(codigoPorteCase5 == "CANCELAR"){
+                            break;
+                        }
+                        else{
+                            if(porteCase5 == null){
+                                System.out.println("Porte no encontrado.");
+                                codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
+                                porteCase5 = planetExpress.listaPortes.buscarPorte(codigoPorteCase5);
+                            }
+                        }
+                    }
+
+                    String nombreFicheroCase5 = Utilidades.leerCadena(teclado, "Nombre del fichero:");
+                    boolean okCase5 = porteCase5.generarListaEnvios(nombreFicheroCase5);
+                    if(okCase5){
+                        System.out.println("Fichero generada correctamente.");
+                    }
+                    else{
+                        System.out.println("Fichero no generada.");
+                    }
                     break;
             }
         } while (opcion != 0);
 
+        String ficheroPuertosSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para puertos espaciales.");
+        String ficheroNavesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para naves.");
+        String ficheroPortesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para portes.");
+        String ficheroClientesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para clientes.");
+        String ficheroEnviosSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para envios.");
+
+        planetExpress.guardarDatos(ficheroPuertosSalida, ficheroNavesSalida, ficheroPortesSalida, ficheroClientesSalida, ficheroEnviosSalida);
 
     }
 }

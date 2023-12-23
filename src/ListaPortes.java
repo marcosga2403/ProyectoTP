@@ -162,30 +162,30 @@ public class ListaPortes {
             sc = new Scanner(new File(fichero));
             sc.useDelimiter(";");
             while (sc.hasNext()) {
-                String id = sc.next();
+                String id = sc.next().trim();
                 String matricula = sc.next();
                 String codOrigen = sc.next();
-                int muelleOrigen = sc.nextInt();
+                String muelleOrigen = sc.next();
                 String stringSalida = sc.next();
-                int salidaNumDia = stringSalida.indexOf(0,2);
-                int salidaNumMes = stringSalida.indexOf(3,5);
-                int salidaNumAnio = stringSalida.indexOf(6,9);
-                int salidaNumHora = stringSalida.indexOf(11,13);
-                int salidaNumMin = stringSalida.indexOf(14,15);
+                int salidaNumDia = Integer.parseInt(stringSalida.substring(0,2));
+                int salidaNumMes = Integer.parseInt(stringSalida.substring(3,5));
+                int salidaNumAnio = Integer.parseInt(stringSalida.substring(6,10));
+                int salidaNumHora = Integer.parseInt(stringSalida.substring(11,13));
+                int salidaNumMin = Integer.parseInt(stringSalida.substring(14,16));
                 Fecha salida = new Fecha(salidaNumDia, salidaNumMes, salidaNumAnio, salidaNumHora, salidaNumMin, 0);
                 String codDestino = sc.next();
-                int muelleDestino = sc.nextInt();;
+                String muelleDestino = sc.next();;
                 String stringLlegada = sc.next();
-                int salidaNumDia2 = stringLlegada.indexOf(0,2);
-                int salidaNumMes2 = stringLlegada.indexOf(3,5);
-                int salidaNumAnio2 = stringLlegada.indexOf(6,9);
-                int salidaNumHora2 = stringLlegada.indexOf(11,13);
-                int salidaNumMin2 = stringLlegada.indexOf(14,15);
+                int salidaNumDia2 = Integer.parseInt(stringLlegada.substring(0,2));
+                int salidaNumMes2 = Integer.parseInt(stringLlegada.substring(3,5));
+                int salidaNumAnio2 = Integer.parseInt(stringLlegada.substring(6,10));
+                int salidaNumHora2 = Integer.parseInt(stringLlegada.substring(11,13));
+                int salidaNumMin2 = Integer.parseInt(stringLlegada.substring(14,16));
                 Fecha llegada = new Fecha(salidaNumDia2, salidaNumMes2, salidaNumAnio2, salidaNumHora2, salidaNumMin2, 0);
-                int precio = sc.nextInt();
+                String precio = sc.next();
                 listaPortes.insertarPorte(new Porte(id,naves.buscarNave(matricula),
-                        puertosEspaciales.buscarPuertoEspacial(codOrigen),muelleOrigen,salida,
-                        puertosEspaciales.buscarPuertoEspacial(codDestino),muelleDestino,llegada,precio));
+                        puertosEspaciales.buscarPuertoEspacial(codOrigen),Integer.parseInt(muelleOrigen),salida,
+                        puertosEspaciales.buscarPuertoEspacial(codDestino),Integer.parseInt(muelleDestino),llegada, Double.parseDouble(precio)));
             }
         } catch (Exception e) {
             return null;
