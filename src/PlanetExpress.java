@@ -71,15 +71,19 @@ public class PlanetExpress {
         this.listaClientes.escribirClientesCsv(ficheroClientes);
         this.listaPortes.getPorte(1).generarListaEnvios(ficheroEnvios);
     }
+
     public boolean maxPortesAlcanzado() {
         return listaPortes.estaLlena();
     }
+
     public boolean insertarPorte (Porte porte) {
         return listaPortes.insertarPorte(porte);
     }
+
     public boolean maxClientesAlcanzado() {
         return listaClientes.estaLlena();
     }
+
     public boolean insertarCliente (Cliente cliente) {
         return listaClientes.insertarCliente(cliente);
     }
@@ -93,21 +97,11 @@ public class PlanetExpress {
      * @return
      */
     public ListaPortes buscarPorte(Scanner teclado) {
-        System.out.println("Introduce el origen del porte: ");
-        String origen = teclado.nextLine();
-        System.out.println("Introduce el destino del porte: ");
-        String destino = teclado.nextLine();
-        System.out.println("Introduce la fecha de salida del porte (dia/mes/año) (hora/minuto/segundo): ");
-        String fechaSalida = teclado.nextLine();
-        int dia = teclado.nextInt();
-        int mes = teclado.nextInt();
-        int anio = teclado.nextInt();
-        int hora = teclado.nextInt();
-        int minuto = teclado.nextInt();
-        int segundo = teclado.nextInt();
-        Fecha fecha = new Fecha(dia,mes,anio,hora,minuto,segundo);
+        String puertoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen: ");
+        String puertoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino: ");
+        Fecha fecha = Utilidades.leerFecha(teclado, "Fecha de Salida:");
 
-        return listaPortes.buscarPortes(origen,destino,fecha);
+        return listaPortes.buscarPortes(puertoOrigen, puertoDestino, fecha);
     }
 
 
@@ -120,17 +114,31 @@ public class PlanetExpress {
      * @param porte
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
-        if (porte != null) {
-            System.out.println("Elija una de las 2 opciones: \n1) Contrataar el envío como un cliente ya registrado.\n2) Contratar el envío como un nuevo cliente.");
-            int opcion = teclado.nextInt();
-            if(opcion == 2){
-                Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
+        Envio envio = null;
+        char seleccionarBillete = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'n', 'n');
+        if(seleccionarBillete == 'e') {
+            String emailCliente = Utilidades.leerCadena(teclado, "Email del cliente:");
+            Cliente clienteCase3 = this.listaClientes.buscarClienteEmail(emailCliente);
+            while (clienteCase3 == null) {
+                System.out.println("Email no encontrado.");
+                emailCliente = Utilidades.leerCadena(teclado, "Email del cliente:");
+                clienteCase3 = this.listaClientes.buscarClienteEmail(emailCliente);
             }
-            System.out.println("Introduzca su email para dar de alta su envío: ");
-            String email = teclado.nextLine();
-            porte.ocuparHueco(Envio.altaEnvio(teclado,rand,porte,listaClientes.buscarClienteEmail(email)));
-            porte.imprimirMatrizHuecos();
+            envio = Envio.altaEnvio(teclado,rand,porte,this.listaClientes.buscarClienteEmail(emailCliente));
+            porte.ocuparHueco(envio);
         }
+        else {
+            Cliente cliente = Cliente.altaCliente(teclado, this.listaClientes, this.maxEnviosPorCliente);
+            if(this.maxClientesAlcanzado()){
+                System.out.println("Numero maximo de clientes alcanzado, no se pudo crear el cliente.");
+            }
+            else{
+                this.insertarCliente(cliente);
+            }
+            envio = Envio.altaEnvio(teclado,rand,porte,this.listaClientes.buscarClienteEmail(cliente.getEmail()));
+            porte.ocuparHueco(envio);
+        }
+        System.out.println("Envio " + envio.getLocalizador() + " creado correctamente.");
     }
 
 
@@ -188,24 +196,95 @@ public class PlanetExpress {
             System.out.println("Número de argumentos incorrecto");
             return;
         }
+
+        /* CAMPOS QUE PROVIENEN DE LA CONFIGURACION DEL MAIN */
+        int maxPuertosEspaciales = Integer.parseInt(args[0]);
+        int maxNaves = Integer.parseInt(args[1]);
+        int maxPortes = Integer.parseInt(args[2]);
+        int maxClientes = Integer.parseInt(args[3]);
+        int maxEnviosPorCliente = Integer.parseInt(args[4]);
+
+        String ficheroPuertos = args[5];
+        String ficheroNaves = args[6];
+        String ficheroPortes = args[7];
+        String ficheroClientes = args[8];
+        String ficheroEnvios = args[9];
+        /* FIN DE LOS CAMPOS DEL MAIN */
+
+        /* CREAMOS EL NEGOCIO DE PLANET EXPRESS */
+        PlanetExpress planetExpress = new PlanetExpress(maxPuertosEspaciales, maxNaves, maxPortes, maxClientes, maxEnviosPorCliente);
+        /* CARGAMOS LOS DATOS DEL NEGOCIO CON LOS FICHEROS */
+        planetExpress.cargarDatos(ficheroPuertos, ficheroNaves, ficheroPortes, ficheroClientes, ficheroEnvios);
+
+        /* EJECUCION */
         Scanner teclado = new Scanner(System.in);
         int opcion = -1;
         do {
             opcion = menu(teclado);
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
-                    Porte.altaPorte(teclado, new Random(), listaPuertosEspaciales, this.listaNaves , this.listaPortes );
-                    System.out.println("Ingrese código de puerto Origen:");
-                    int codigoPuertoOrigen;
+                    Porte porte = Porte.altaPorte(teclado, new Random(), planetExpress.listaPuertosEspaciales, planetExpress.listaNaves , planetExpress.listaPortes );
+                    planetExpress.insertarPorte(porte);
                     break;
                 case 2:     // TODO: Alta de Cliente
-                    Cliente.altaCliente(teclado, listaClientes,  )
+                    Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
+                    if(planetExpress.maxClientesAlcanzado()){
+                        System.out.println("Numero maximo de clientes alcanzado, no se pudo crear el cliente.");
+                    }
+                    else{
+                        planetExpress.insertarCliente(cliente);
+                    }
                     break;
                 case 3:     // TODO: Buscar Porte
-                    Porte porte =
+                    ListaPortes listaPortes = planetExpress.buscarPorte(teclado);
+                    listaPortes.listarPortes();
+
+                    String codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
+                    Porte porteCase3 = listaPortes.buscarPorte(codigoPorte);
+                    while (codigoPorte != "CANCELAR" || porteCase3 == null){
+                        if(codigoPorte == "CANCELAR"){
+                            break;
+                        }
+                        else{
+                            if(porteCase3 == null){
+                                System.out.println("Porte no encontrado.");
+                                codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
+                                porteCase3 = listaPortes.buscarPorte(codigoPorte);
+                            }
+                        }
+                    }
+
+                    planetExpress.contratarEnvio(teclado, new Random(), porteCase3);
+
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
+                    String emailCliente = Utilidades.leerCadena(teclado, "Email del cliente:");
+                    String localizadorEnvioCliente = Utilidades.leerCadena(teclado, "Seleccione un envio:");
+                    Cliente clienteCase4 = planetExpress.listaClientes.buscarClienteEmail(emailCliente);
+                    ListaEnvios listaEnvios = clienteCase4.getListaEnvios();
+                    Envio envio = listaEnvios.buscarEnvio(localizadorEnvioCliente);
+                    while(envio == null){
+                        System.out.println("Localizador incorrecto");
+                        localizadorEnvioCliente = Utilidades.leerCadena(teclado, "Seleccione un envio:");
+                        clienteCase4 = planetExpress.listaClientes.buscarClienteEmail(emailCliente);
+                        listaEnvios = clienteCase4.getListaEnvios();
+                        envio = listaEnvios.buscarEnvio(localizadorEnvioCliente);
+                    }
 
+                    char cancelarOfactura = Utilidades.leerLetra(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c','f');
+                    if(cancelarOfactura == 'c'){
+
+                    }
+                    else {
+                        String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero:");
+                        boolean ok = envio.generarFactura(nombreFichero);
+                        if(ok){
+                            System.out.println("Factura generada correctamente.");
+                        }
+                        else{
+                            System.out.println("Factura no generada.");
+                        }
+                    }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
 

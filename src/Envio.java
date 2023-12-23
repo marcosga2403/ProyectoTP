@@ -242,18 +242,12 @@ public class Envio {
      */
 
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-        String localizador;
-        int fila;
-        int columna;
-        double precio;
 
-        localizador = generarLocalizador(rand,porte.getID());
-        porte.imprimirMatrizHuecos();
-        System.out.println("Introduce fila y columna del hueco que quieras que ocupe tu envío (Siempre que esté  libre): ");
-        fila = teclado.nextInt();
-        columna = teclado.nextInt();
-        precio = porte.getPrecio();
+        String localizador = generarLocalizador(rand,porte.getID());
+        int filaDelHueco = Integer.parseInt(Utilidades.leerCadena(teclado, "Fila del hueco:"));
+        int columnaDelHueco = Integer.parseInt(Utilidades.leerCadena(teclado, "Columna del hueco:"));
+        int precioDelEnvio = Integer.parseInt(Utilidades.leerCadena(teclado, "Precio del envío:"));
 
-        return new Envio(localizador,porte,cliente,fila,columna,precio);
+        return new Envio(localizador, porte, cliente, filaDelHueco, columnaDelHueco, precioDelEnvio);
     }
 }

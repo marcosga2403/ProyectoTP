@@ -84,19 +84,23 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha){
+        ListaPortes listaPortes = new ListaPortes(portes.length);
         for (int i = 0; i<portes.length; i++){
             if ((portes[i].getOrigen().equals(codigoOrigen) && (portes[i].getDestino().equals(codigoDestino)) && (portes[i].getLlegada().equals(fecha)))){
+                listaPortes.insertarPorte(portes[i]);
             }
         }
-        return new ListaPortes(portes.length);
+        return listaPortes;
     }
 
     /**
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-        for (int i =0; i<= portes.length; i++){
-            System.out.println(portes[i].toString());
+        for (int i = 0; i < this.getOcupacion(); i++){
+            System.out.println("Porte " + portes[i].getID()+ " de " + portes[i].getOrigen().toStringSimple() + " M" + portes[i].getOrigen().getMuelles() + " ("
+                + portes[i].getSalida().toString() + ") a " + portes[i].getDestino().toStringSimple() + " M" + portes[i].getDestino().getMuelles() + " ("
+                    + portes[i].getLlegada().toString() + ")");
         }
     }
 

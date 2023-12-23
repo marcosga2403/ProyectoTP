@@ -78,11 +78,14 @@ public class Utilidades {
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
-        do {
+
+        System.out.println(mensaje);
+        letra = teclado.next().charAt(0);
+        while (letra!=minimo && letra!=maximo){
+            System.out.println("El valor de entrada debe ser 'n' o 'e'");
             System.out.println(mensaje);
             letra = teclado.next().charAt(0);
-        }while (letra<minimo||letra>maximo);
-
+        }
 
         return letra;
     }
@@ -98,14 +101,19 @@ public class Utilidades {
         int dia;
         int mes;
         int anio;
-       do {
-           System.out.println(mensaje);
-           dia = teclado.nextInt();
-           mes = teclado.nextInt();
-           anio = teclado.nextInt();
-       }while ((mes>12||mes<0)||(numeroDeDiasMes(mes)==31 && dia>31||dia<0)||(mes==2 && dia>28||dia<0)||(esBisiesto(anio)==true && mes==2 && dia>29||dia<0)||(numeroDeDiasMes(mes)==30 && dia>30||dia<0));
 
+        /* Uso Integer.parseInt para transformar el string leido por un int */
+        System.out.println(mensaje);
+        dia = Integer.parseInt(Utilidades.leerCadena(teclado, "Dia: "));
+        mes = Integer.parseInt(Utilidades.leerCadena(teclado, "Mes: "));
+        anio = Integer.parseInt(Utilidades.leerCadena(teclado, "Anio: "));
 
+        while ((mes>12||mes<0)||(numeroDeDiasMes(mes)==31 && dia>31||dia<0)||(mes==2 && dia>28||dia<0)||(esBisiesto(anio) && mes==2 && dia>29||dia<0)||(numeroDeDiasMes(mes)==30 && dia>30||dia<0)){
+            System.out.println("Fecha itroducida incorrecta.");
+            dia = Integer.parseInt(Utilidades.leerCadena(teclado, "Ingrese dia: "));
+            mes = Integer.parseInt(Utilidades.leerCadena(teclado, "Ingrese mes: "));
+            anio = Integer.parseInt(Utilidades.leerCadena(teclado, "Ingrese anio: "));
+        }
 
         return new Fecha(dia, mes, anio);
     }
@@ -174,6 +182,7 @@ public class Utilidades {
         }
         return numeroDias;
     }
+
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
      * @param teclado

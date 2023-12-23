@@ -84,10 +84,10 @@ public class PuertoEspacial {
 
     /**
      * TODO: Método que crea un String con los datos de un aeropuerto con el siguiente formato:
-     * @return ejemplo -> "Gaia Galactic Terminal (GGT)"
-     * TODO: ¿?
+     * @return ejemplo -> "Gaia Galactic Terminal (GGT)
      */
+    /* En el enunciado de la practica aparece el parentesis pegado al nombre como Mercury Station(MS-1) */
     public String toStringSimple() {
-        return this.nombre;
+        return this.nombre + "(" + this.codigo + ")";
     }
 }
