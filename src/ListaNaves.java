@@ -72,11 +72,12 @@ public class ListaNaves {
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
-        for (int i = 0;i<naves.length;i++){
-            if(naves[i].getMatricula()==matricula){
+        for (int i = 0; i < naves.length; i++){
+            if(naves[i].getMatricula().equals(matricula)){
                 return naves[i];
             }
         }
+        System.out.println("Nave con matricula " + matricula + " no encontrada.");
         return null;
 
     }

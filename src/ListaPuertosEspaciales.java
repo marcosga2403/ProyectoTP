@@ -51,7 +51,7 @@ public class ListaPuertosEspaciales {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-        for (int i = 0; i<lista.length; i++){
+        for (int i = 0; i< lista.length; i++){
             if(lista[i] == null){
                 lista[i] = puertoEspacial;
                 return true;
@@ -66,11 +66,12 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-        for (int i= 0; i< lista.length; i++){
+        for (int i= 0; i < lista.length; i++){
             if (lista[i].getCodigo().equals(codigo)){
                 return lista[i];
             }
         }
+        System.out.println("Puerto con codigo " + codigo + " no encontrado.");
         return null;
     }
 

@@ -97,7 +97,7 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-        for (int i = 0; i < this.getOcupacion(); i++){
+        for (int i = 0; i < portes.length; i++){
             System.out.println("Porte " + portes[i].getID()+ " de " + portes[i].getOrigen().toStringSimple() + " M" + portes[i].getOrigen().getMuelles() + " ("
                 + portes[i].getSalida().toString() + ") a " + portes[i].getDestino().toStringSimple() + " M" + portes[i].getDestino().getMuelles() + " ("
                     + portes[i].getLlegada().toString() + ")");
@@ -183,9 +183,15 @@ public class ListaPortes {
                 int salidaNumMin2 = Integer.parseInt(stringLlegada.substring(14,16));
                 Fecha llegada = new Fecha(salidaNumDia2, salidaNumMes2, salidaNumAnio2, salidaNumHora2, salidaNumMin2, 0);
                 String precio = sc.next();
-                listaPortes.insertarPorte(new Porte(id,naves.buscarNave(matricula),
-                        puertosEspaciales.buscarPuertoEspacial(codOrigen),Integer.parseInt(muelleOrigen),salida,
-                        puertosEspaciales.buscarPuertoEspacial(codDestino),Integer.parseInt(muelleDestino),llegada, Double.parseDouble(precio)));
+
+                Nave nave = naves.buscarNave(matricula);
+                PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codOrigen);
+                PuertoEspacial puertoEspacialDestino = puertosEspaciales.buscarPuertoEspacial(codDestino);
+
+                Porte porte = new Porte(id, nave,  puertoEspacialOrigen, Integer.parseInt(muelleOrigen), salida, puertoEspacialDestino,
+                        Integer.parseInt(muelleDestino), llegada, Double.parseDouble(precio));
+
+                listaPortes.insertarPorte(porte);
             }
         } catch (Exception e) {
             return null;

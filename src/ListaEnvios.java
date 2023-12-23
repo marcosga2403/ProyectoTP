@@ -51,14 +51,14 @@ public class ListaEnvios {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarEnvio(Envio envio) {
-        for (int i = 0; i<envios.length; i++){
-            if(envios[i] == null){
-                envios[i] = envio;
-                envios[i].getPorte().ocuparHueco(envio);
-                return true;
-            }
+        int posicion = this.getOcupacion();
+        if(posicion > envios.length || posicion == envios.length && envios[posicion] != null){
+            return false;
         }
-        return false;
+        else{
+            envios[posicion] = envio;
+            return true;
+        }
     }
 
     /**
@@ -67,7 +67,7 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-        for (int i= 0; i< this.getOcupacion(); i++){
+        for (int i= 0; i< envios.length; i++){
             if (envios[i].getLocalizador().equals(localizador)){
                 return envios[i];
             }
@@ -172,13 +172,13 @@ public class ListaEnvios {
             sc = new Scanner(new File(ficheroEnvios));
             sc.useDelimiter(";");
             while (sc.hasNext()){
-                String localizador = sc.next();
+                String localizador = sc.next().trim();
                 Porte porte = portes.buscarPorte(sc.next());
                 Cliente cliente = clientes.buscarClienteEmail(sc.next());
-                int fila = sc.nextInt();
-                int columnas = sc.nextInt();
-                double precio = sc.nextDouble();
-                Envio envio = new Envio(localizador, porte, cliente, fila, columnas, precio);
+                String fila = sc.next();
+                String columnas = sc.next();
+                String precio = sc.next();
+                Envio envio = new Envio(localizador, porte, cliente, Integer.parseInt(fila)-1, Integer.parseInt(columnas)-1, Double.parseDouble(precio));
                 porte.ocuparHueco(envio);
                 cliente.aniadirEnvio(envio);
             }
