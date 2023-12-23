@@ -149,24 +149,25 @@ public class PlanetExpress {
      * @return opción seleccionada
      */
     public static int menu(Scanner teclado) {
+        System.out.print("Seleccione opcion: ");
         int opcion = teclado.nextInt();
         switch (opcion){
-            case 0:
-                System.out.println("1. Alta de Porte");;
-                break;
             case 1:
-                System.out.println("2. Alta de Cliente");
+                System.out.println("1. Alta de Porte");
                 break;
             case 2:
-                System.out.println("3. Buscar Porte");
+                System.out.println("2. Alta de Cliente");
                 break;
             case 3:
-                System.out.println("4. Mostrar envíos de un cliente");
+                System.out.println("3. Buscar Porte");
                 break;
             case 4:
-                System.out.println("5. Generar lista de envíos");
+                System.out.println("4. Mostrar envíos de un cliente");
                 break;
             case 5:
+                System.out.println("5. Generar lista de envíos");
+                break;
+            case 6:
                 System.out.println("0. Salir");
                 break;
         }
@@ -224,7 +225,9 @@ public class PlanetExpress {
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
                     Porte porte = Porte.altaPorte(teclado, new Random(), planetExpress.listaPuertosEspaciales, planetExpress.listaNaves , planetExpress.listaPortes );
-                    planetExpress.insertarPorte(porte);
+                    if(porte != null) {
+                        planetExpress.insertarPorte(porte);
+                    }
                     break;
                 case 2:     // TODO: Alta de Cliente
                     Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
@@ -237,24 +240,29 @@ public class PlanetExpress {
                     break;
                 case 3:     // TODO: Buscar Porte
                     ListaPortes listaPortes = planetExpress.buscarPorte(teclado);
-                    listaPortes.listarPortes();
+                    if(listaPortes.getOcupacion() > 0) {
+                        listaPortes.listarPortes();
 
-                    String codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
-                    Porte porteCase3 = listaPortes.buscarPorte(codigoPorte);
-                    while (codigoPorte != "CANCELAR" || porteCase3 == null){
-                        if(codigoPorte == "CANCELAR"){
-                            break;
-                        }
-                        else{
-                            if(porteCase3 == null){
-                                System.out.println("Porte no encontrado.");
-                                codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
-                                porteCase3 = listaPortes.buscarPorte(codigoPorte);
+                        String codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
+                        Porte porteCase3 = listaPortes.buscarPorte(codigoPorte);
+                        while (codigoPorte != "CANCELAR" || porteCase3 == null){
+                            if(codigoPorte == "CANCELAR"){
+                                break;
+                            }
+                            else{
+                                if(porteCase3 == null){
+                                    System.out.println("Porte no encontrado.");
+                                    codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
+                                    porteCase3 = listaPortes.buscarPorte(codigoPorte);
+                                }
                             }
                         }
-                    }
 
-                    planetExpress.contratarEnvio(teclado, new Random(), porteCase3);
+                        planetExpress.contratarEnvio(teclado, new Random(), porteCase3);
+                    }
+                    else{
+                        System.out.println("No existe ningun porte con esos datos.");
+                    }
 
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
@@ -300,7 +308,7 @@ public class PlanetExpress {
                         else{
                             if(porteCase5 == null){
                                 System.out.println("Porte no encontrado.");
-                                codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
+                                codigoPorteCase5 = Utilidades.leerCadena(teclado, "Seleccione un porte:");
                                 porteCase5 = planetExpress.listaPortes.buscarPorte(codigoPorteCase5);
                             }
                         }
