@@ -93,17 +93,15 @@ public class Cliente {
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
 
-        String email;
-        String nombre;
-        String apellidos;
-        do {
-            System.out.println("Introduzca su nombre: ");
-             nombre = teclado.nextLine();
-            System.out.println("Introduzca sus apellidos: ");
-             apellidos = teclado.nextLine();
-            System.out.println("Introduzca su email: ");
-            email = teclado.nextLine();
-        }while (clientes.buscarClienteEmail(email)!=null);
+        String nombre = Utilidades.leerCadena(teclado,"Introduzca su nombre: ");
+        String apellidos = Utilidades.leerCadena(teclado,"Introduzca su apellido: ");
+        String email = Utilidades.leerCadena(teclado,"Introduzca su email: ");
+        while (clientes.buscarClienteEmail(email)!=null){
+            nombre = Utilidades.leerCadena(teclado,"Introduzca su nombre: ");
+            apellidos = Utilidades.leerCadena(teclado,"Introduzca su apellido: ");
+            email = Utilidades.leerCadena(teclado,"Introduzca su email: ");
+        }
+        System.out.println("Cliente con email "+email+" creado correctamente");
         return new Cliente(nombre, apellidos, email, maxEnvios);
     }
 

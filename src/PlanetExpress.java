@@ -298,20 +298,14 @@ public class PlanetExpress {
                     planetExpress.listaPortes.listarPortes();
 
                     String codigoPorteCase5 = Utilidades.leerCadena(teclado, "Seleccione un porte:");
-
                     Porte porteCase5 = planetExpress.listaPortes.buscarPorte(codigoPorteCase5);
-
-                    while (codigoPorteCase5 != "CANCELAR" || porteCase5 == null){
-                        if(codigoPorteCase5 == "CANCELAR"){
-                            break;
-                        }
-                        else{
-                            if(porteCase5 == null){
-                                System.out.println("Porte no encontrado.");
-                                codigoPorteCase5 = Utilidades.leerCadena(teclado, "Seleccione un porte:");
-                                porteCase5 = planetExpress.listaPortes.buscarPorte(codigoPorteCase5);
-                            }
-                        }
+                    if(codigoPorteCase5 == "CANCELAR") {
+                        break;
+                    }
+                    while (porteCase5 == null) {
+                        System.out.println("Porte no encontrado.");
+                        codigoPorteCase5 = Utilidades.leerCadena(teclado, "Seleccione un porte:");
+                        porteCase5 = planetExpress.listaPortes.buscarPorte(codigoPorteCase5);
                     }
 
                     String nombreFicheroCase5 = Utilidades.leerCadena(teclado, "Nombre del fichero:");
