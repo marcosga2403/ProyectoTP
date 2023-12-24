@@ -124,10 +124,9 @@ public class ListaNaves {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(new File(nombre));
-            for (int i = 0; i < naves.length; i++) {
+            for (int i = 0; i < this.getOcupacion(); i++) {
                 pw.println(naves[i].toString());
             }
-            return true;
         } catch (Exception e) {
             return false;
         } finally {
@@ -135,6 +134,7 @@ public class ListaNaves {
                 pw.close();
             }
         }
+        return true;
     }
 
 

@@ -65,7 +65,7 @@ public class ListaClientes {
 
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
     public Cliente buscarClienteEmail(String email) {
-        for (int i = 0; i < clientes.length; i++) {
+        for (int i = 0; i < this.getOcupacion(); i++) {
             if (clientes[i].getEmail().equals(email)) {
                 return clientes[i];
             }
@@ -103,7 +103,7 @@ public class ListaClientes {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(new File(fichero));
-            for (int i = 0; i < clientes.length; i++) {
+            for (int i = 0; i < this.getOcupacion(); i++) {
                 pw.println(clientes[i].toString());
             }
         } catch (FileNotFoundException e) {

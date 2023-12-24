@@ -67,7 +67,7 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-        for (int i= 0; i< portes.length; i++){
+        for (int i= 0; i< this.getOcupacion(); i++){
             if (portes[i].getID().equals(id)){
                 return portes[i];
             }
@@ -86,7 +86,7 @@ public class ListaPortes {
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha){
         ListaPortes listaPortes = new ListaPortes(portes.length);
         for (int i = 0; i<portes.length; i++){
-            if ((portes[i].getOrigen().equals(codigoOrigen) && (portes[i].getDestino().equals(codigoDestino)) && (portes[i].getLlegada().equals(fecha)))){
+            if ((portes[i].getOrigen().getCodigo().equals(codigoOrigen) && (portes[i].getDestino().getCodigo().equals(codigoDestino)) && (portes[i].getSalida().coincide(fecha)))){
                 listaPortes.insertarPorte(portes[i]);
             }
         }
@@ -97,7 +97,7 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-        for (int i = 0; i < portes.length; i++){
+        for (int i = 0; i < this.getOcupacion(); i++){
             System.out.println("Porte " + portes[i].getID()+ " de " + portes[i].getOrigen().toStringSimple() + " M" + portes[i].getOrigen().getMuelles() + " ("
                 + portes[i].getSalida().toString() + ") a " + portes[i].getDestino().toStringSimple() + " M" + portes[i].getDestino().getMuelles() + " ("
                     + portes[i].getLlegada().toString() + ")");
@@ -137,13 +137,16 @@ public class ListaPortes {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(new File(fichero));
-            for (int i = 0; i < portes.length; i++){
+            for (int i = 0; i < this.getOcupacion(); i++){
                 pw.println(portes[i].toString());
             }
-            return true;
         } catch (FileNotFoundException e) {
             return false;
         }
+        finally {
+            pw.close();
+        }
+        return true;
     }
 
     /**

@@ -67,7 +67,7 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-        for (int i= 0; i< envios.length; i++){
+        for (int i= 0; i< this.getOcupacion(); i++){
             if (envios[i].getLocalizador().equals(localizador)){
                 return envios[i];
             }
@@ -97,9 +97,9 @@ public class ListaEnvios {
      * @return True si se ha borrado correctamente, false en cualquier otro caso
      */
     public boolean eliminarEnvio (String localizador) {
-        for (int i = 0; i < envios.length; i++){
+        for (int i = 0; i < this.getOcupacion(); i++){
             if (envios[i].getLocalizador().equals(localizador)){
-                envios[i].cancelar();
+                envios[i] = null;
                 return true;
             }
         }

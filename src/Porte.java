@@ -49,6 +49,7 @@ public class  Porte {
         this.llegada = llegada;
         this.precio = precio;
         this.huecos = new boolean[nave.getFilas()][nave.getColumnas()];
+        listaEnvios = new ListaEnvios(nave.getFilas() + nave.getColumnas());
     }
 
     public String getID() {
@@ -138,6 +139,7 @@ public class  Porte {
         if (huecoOcupado(envio.getFila() , envio.getColumna())) {
             return false;
         }
+        listaEnvios.insertarEnvio(envio);
         huecos[envio.getFila()][envio.getColumna()] = true;
         return true;
     }
@@ -219,10 +221,13 @@ public class  Porte {
             for (int i = 0; i < listaEnvios.getOcupacion(); i++){
                 pw.println(listaEnvios.getEnvio(i).toString());
             }
-            return true;
         } catch (FileNotFoundException e) {
             return false;
         }
+        finally {
+            pw.close();
+        }
+        return true;
     }
 
 

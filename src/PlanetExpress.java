@@ -69,7 +69,9 @@ public class PlanetExpress {
         this.listaNaves.escribirNavesCsv(ficheroNaves);
         this.listaPortes.escribirPortesCsv(ficheroPortes);
         this.listaClientes.escribirClientesCsv(ficheroClientes);
-        this.listaPortes.getPorte(1).generarListaEnvios(ficheroEnvios);
+        for(int i = 0; i < this.maxPortes; i++){
+            this.listaPortes.getPorte(i).generarListaEnvios(ficheroEnvios + i + ".txt");
+        }
     }
 
     public boolean maxPortesAlcanzado() {
@@ -115,7 +117,7 @@ public class PlanetExpress {
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         Envio envio = null;
-        char seleccionarBillete = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'n', 'n');
+        char seleccionarBillete = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'n', 'e');
         if(seleccionarBillete == 'e') {
             String emailCliente = Utilidades.leerCadena(teclado, "Email del cliente:");
             Cliente clienteCase3 = this.listaClientes.buscarClienteEmail(emailCliente);
@@ -221,6 +223,16 @@ public class PlanetExpress {
         Scanner teclado = new Scanner(System.in);
         int opcion = -1;
         do {
+
+            System.out.println("---------------------------------");
+            System.out.println("1. Alta de Porte");
+            System.out.println("2. Alta de Cliente");
+            System.out.println("3. Buscar Porte");
+            System.out.println("4. Mostrar envíos de un cliente");
+            System.out.println("5. Generar lista de envíos");
+            System.out.println("0. Salir");
+            System.out.println("---------------------------------");
+
             opcion = menu(teclado);
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
@@ -245,8 +257,8 @@ public class PlanetExpress {
 
                         String codigoPorte = Utilidades.leerCadena(teclado, "Seleccione un porte:");
                         Porte porteCase3 = listaPortes.buscarPorte(codigoPorte);
-                        while (codigoPorte != "CANCELAR" || porteCase3 == null){
-                            if(codigoPorte == "CANCELAR"){
+                        while (porteCase3 == null && codigoPorte.equals("CANCELAR") || porteCase3 == null){
+                            if(codigoPorte.equals("CANCELAR")){
                                 break;
                             }
                             else{
@@ -257,8 +269,9 @@ public class PlanetExpress {
                                 }
                             }
                         }
-
-                        planetExpress.contratarEnvio(teclado, new Random(), porteCase3);
+                        if(!codigoPorte.equals("CANCELAR")){
+                            planetExpress.contratarEnvio(teclado, new Random(), porteCase3);
+                        }
                     }
                     else{
                         System.out.println("No existe ningun porte con esos datos.");
@@ -281,7 +294,12 @@ public class PlanetExpress {
 
                     char cancelarOfactura = Utilidades.leerLetra(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c','f');
                     if(cancelarOfactura == 'c'){
-
+                        if(envio.cancelar()){
+                            System.out.println("Envio " + envio.getLocalizador() + " borrado correctamente");
+                        }
+                        else{
+                            System.out.println("No se pudo borrar el envio " + envio.getLocalizador());
+                        }
                     }
                     else {
                         String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero:");
@@ -318,13 +336,15 @@ public class PlanetExpress {
                     }
                     break;
             }
+
+
         } while (opcion != 0);
 
-        String ficheroPuertosSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para puertos espaciales.");
-        String ficheroNavesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para naves.");
-        String ficheroPortesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para portes.");
-        String ficheroClientesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para clientes.");
-        String ficheroEnviosSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para envios.");
+        String ficheroPuertosSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para puertos espaciales:");
+        String ficheroNavesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para naves:");
+        String ficheroPortesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para portes:");
+        String ficheroClientesSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para clientes:");
+        String ficheroEnviosSalida = Utilidades.leerCadena(teclado, "Escribe el nombre del fichero de salida para envios:");
 
         planetExpress.guardarDatos(ficheroPuertosSalida, ficheroNavesSalida, ficheroPortesSalida, ficheroClientesSalida, ficheroEnviosSalida);
 

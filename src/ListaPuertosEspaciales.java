@@ -102,10 +102,9 @@ public class ListaPuertosEspaciales {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(new File(nombre));
-            for (int i = 0; i < lista.length; i++){
+            for (int i = 0; i < this.getOcupacion(); i++){
                 pw.println(lista[i].toString());
             }
-            return true;
         } catch (Exception e) {
             return false;
         } finally {
@@ -113,6 +112,7 @@ public class ListaPuertosEspaciales {
                 pw.close();
             }
         }
+        return true;
     }
 
 

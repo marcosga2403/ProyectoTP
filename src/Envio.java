@@ -149,13 +149,12 @@ public class Envio {
 
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
     public String toString() {
-        return "Envio " + getLocalizador() + " para Porte " + getPorte() + " de " + porte.getOrigen() + porte.getSalida() +
+        return "Envio " + getLocalizador() + " para Porte " + getPorte() + " de " + porte.getOrigen() + " " + porte.getSalida() +
                 " a " + porte.getDestino() + " en hueco " + getHueco() + " por " + getPrecio();
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
-        cliente.cancelarEnvio(getLocalizador());
-        return false;
+        return cliente.cancelarEnvio(getLocalizador());
     }
 
     /**
@@ -188,24 +187,27 @@ public class Envio {
         System.out.println("Cliente: "+getCliente());
         System.out.println("Hueco: "+getHueco());
         System.out.println("Precio: "+getPrecio());
-        PrintWriter ficheroSalida = null;
+        PrintWriter pw = null;
         try {
-            ficheroSalida = new PrintWriter("C:\\" + fichero + ".txt");
-            ficheroSalida.println("-----------------------------------------------------");
-            ficheroSalida.println("--------- Factura del envio\"+getLocalizador()+\" ---------");
-            ficheroSalida.println("-----------------------------------------------------");
-            ficheroSalida.println("Porte:" +getPorte());
-            ficheroSalida.println("Origen: "+porte.getOrigen());
-            ficheroSalida.println("Destino: "+porte.getDestino());
-            ficheroSalida.println("Salida: "+porte.getSalida());
-            ficheroSalida.println("Llegada: "+porte.getLlegada());
-            ficheroSalida.println("Cliente: "+getCliente());
-            ficheroSalida.println("Hueco: "+getHueco());
-            ficheroSalida.println("Precio: "+getPrecio());
-            return true;
+            pw = new PrintWriter(fichero);
+            pw.println("-----------------------------------------------------");
+            pw.println("--------- Factura del envio " + getLocalizador()+ " ---------");
+            pw.println("-----------------------------------------------------");
+            pw.println("Porte:" +getPorte());
+            pw.println("Origen: "+porte.getOrigen());
+            pw.println("Destino: "+porte.getDestino());
+            pw.println("Salida: "+porte.getSalida());
+            pw.println("Llegada: "+porte.getLlegada());
+            pw.println("Cliente: "+getCliente());
+            pw.println("Hueco: "+getHueco());
+            pw.println("Precio: "+getPrecio());
         } catch (FileNotFoundException e) {
             return false;
         }
+        finally {
+            pw.close();
+        }
+        return true;
     }
 
 
